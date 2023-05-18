@@ -1,3 +1,3 @@
 <template>
-  <h3>home page</h3>
+  <h2>ahihi</h2>
 </template>
