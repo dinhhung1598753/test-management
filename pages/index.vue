@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   beforeRouteEnter(to, from, next) {
-    next({ path: "/test-management" });
+    next({ path: "/admin" });
   },
 };
 </script>

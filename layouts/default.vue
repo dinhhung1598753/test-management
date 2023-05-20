@@ -8,7 +8,8 @@ nuxtApp.hook("page:finish", () => {
 </script>
 <template>
   <div class="app-layout">
-    <layout-header />
+    <!-- <layout-header /> -->
+    <layout-navigation />
     <div ref="pageContainer" class="page-container">
       <slot />
     </div>
@@ -21,11 +22,11 @@ nuxtApp.hook("page:finish", () => {
   overflow: hidden;
 
   > .page-container {
-    background-color: $color-gray-6;
     font-size: $font-sm;
-    padding: 0 16px 16px 16px;
+    padding: 16px;
     overflow-y: scroll;
     height: calc(100% - #{$header-height});
+    margin-left: 254px;
   }
 }
 </style>
