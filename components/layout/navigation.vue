@@ -25,7 +25,11 @@ const menus: MenuItem[] = [
     icon: "mdi-book-open-page-variant",
     path: "/admin/test-management",
   },
-  { title: "Quản lí tài khoản", icon: "mdi-account-circle", path: "/" },
+  {
+    title: "Quản lí tài khoản",
+    icon: "mdi-account-circle",
+    path: "/admin/profile",
+  },
 ];
 const router = useRouter();
 const route = useRoute();
