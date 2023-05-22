@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-interface MenuItem {
-  title: string;
-  icon: string;
-  path?: string;
-}
-const menus: MenuItem[] = [
+import { MenuItem, AUTH_USER } from "@/types";
+
+const authUser = ref("teacher"); // TODO: check auth user to show navigation
+const menuByAdmin: MenuItem[] = [
   {
     title: "Trang chủ",
     icon: "mdi-home-city",
@@ -31,6 +29,59 @@ const menus: MenuItem[] = [
     path: "/admin/profile",
   },
 ];
+
+const menuByStudent: MenuItem[] = [
+  {
+    title: "Trang chủ",
+    icon: "mdi-home-city",
+    path: "/",
+  },
+  {
+    title: "Thư viện đề thi",
+    icon: "mdi-book-open",
+    path: "/student/tests",
+  },
+  {
+    title: "Quản lí tài khoản",
+    icon: "mdi-account-circle",
+    path: "/student/profile",
+  },
+];
+
+const menuByTeacher: MenuItem[] = [
+  {
+    title: "Trang chủ",
+    icon: "mdi-home-city",
+    path: "/",
+  },
+  {
+    title: "Quản lí học sinh",
+    icon: "mdi-account-group-outline",
+    path: "/teacher/students",
+  },
+  {
+    title: "Quản lí bài thi",
+    icon: "mdi-book-open-page-variant",
+    path: "/teacher/test-management",
+  },
+  {
+    title: "Chấm bài thi offline",
+    icon: "mdi-lead-pencil",
+    path: "/teacher/mark-the-exam",
+  },
+  {
+    title: "Quản lí tài khoản",
+    icon: "mdi-account-circle",
+    path: "/teacher/profile",
+  },
+];
+
+const menus = computed(() => {
+  if (authUser.value === AUTH_USER.admin) return menuByAdmin;
+  else if (authUser.value === AUTH_USER.student) return menuByStudent;
+  return menuByTeacher;
+});
+
 const router = useRouter();
 const route = useRoute();
 
@@ -53,7 +104,6 @@ const handleRedirect = (path: string) => {
           <v-list-item
             lines="two"
             prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
-            title="Admin"
             subtitle="Logged in"
           ></v-list-item>
         </template>

@@ -1,5 +1,13 @@
 <script lang="ts" setup>
+import { UserInfo } from "@/types";
 import blankAvatar from "@/assets/images/blank-avatar.png";
+
+const props = defineProps({
+  userInfo: {
+    type: Object,
+    default: () => ({}),
+  },
+});
 </script>
 
 <template>
@@ -27,14 +35,14 @@ import blankAvatar from "@/assets/images/blank-avatar.png";
             required
           ></v-text-field>
           <v-text-field
-            v-model="fullname"
+            v-model="userInfo.fullName"
             :rules="nameRules"
             :counter="10"
             label="Họ và tên"
             required
           ></v-text-field>
           <v-text-field
-            v-model="gender"
+            v-model="userInfo.gender"
             :rules="nameRules"
             :counter="10"
             label="Giới tính"
@@ -43,21 +51,21 @@ import blankAvatar from "@/assets/images/blank-avatar.png";
         </div>
         <div class="detail">
           <v-text-field
-            v-model="birthday"
+            v-model="userInfo.birthday"
             :rules="nameRules"
             :counter="10"
             label="Năm sinh"
             required
           ></v-text-field>
           <v-text-field
-            v-model="phoneNumber"
+            v-model="userInfo.phoneNumber"
             :rules="nameRules"
             :counter="10"
             label="Điện thoại"
             required
           ></v-text-field>
           <v-text-field
-            v-model="email"
+            v-model="userInfo.email"
             :rules="emailRules"
             :counter="10"
             label="Email"

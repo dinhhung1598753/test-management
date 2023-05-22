@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: "auth",
+});
+</script>
+
 <template>
   <v-sheet class="bg-deep-purple pa-12" rounded>
     <v-card class="mx-auto px-6 py-8" max-width="344">
@@ -8,7 +14,7 @@
           :rules="[required]"
           class="mb-2"
           clearable
-          label="Email"
+          label="Nhập email"
         ></v-text-field>
 
         <v-text-field
@@ -16,8 +22,8 @@
           :readonly="loading"
           :rules="[required]"
           clearable
-          label="Password"
-          placeholder="Enter your password"
+          label="Nhập mật"
+          placeholder="Nhập mật khẩu"
         ></v-text-field>
 
         <br />
@@ -31,7 +37,7 @@
           type="submit"
           variant="elevated"
         >
-          Sign In
+          Đăng nhập
         </v-btn>
       </v-form>
     </v-card>

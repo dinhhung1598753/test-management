@@ -1,52 +1,54 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: "auth",
+});
+</script>
+
 <template>
-  <v-card class="mx-auto" max-width="344" title="User Registration">
-    <v-container>
-      <v-text-field
-        v-model="first"
-        color="primary"
-        label="First name"
-        variant="underlined"
-      ></v-text-field>
+  <v-sheet class="bg-deep-purple pa-12" rounded>
+    <v-card class="mx-auto px-6 py-8" max-width="344">
+      <v-form v-model="form" @submit.prevent="onSubmit">
+        <v-text-field
+          v-model="username"
+          :readonly="loading"
+          :rules="[required]"
+          class="mb-2"
+          clearable
+          label="Nhập họ và tên"
+        ></v-text-field>
 
-      <v-text-field
-        v-model="last"
-        color="primary"
-        label="Last name"
-        variant="underlined"
-      ></v-text-field>
+        <v-text-field
+          v-model="email"
+          :readonly="loading"
+          :rules="[required]"
+          class="mb-2"
+          clearable
+          label="Nhập email"
+        ></v-text-field>
 
-      <v-text-field
-        v-model="email"
-        color="primary"
-        label="Email"
-        variant="underlined"
-      ></v-text-field>
+        <v-text-field
+          v-model="password"
+          :readonly="loading"
+          :rules="[required]"
+          clearable
+          label="Nhập mật khẩu"
+          placeholder="Nhập mật khẩu"
+        ></v-text-field>
 
-      <v-text-field
-        v-model="password"
-        color="primary"
-        label="Password"
-        placeholder="Enter your password"
-        variant="underlined"
-      ></v-text-field>
+        <br />
 
-      <v-checkbox
-        v-model="terms"
-        color="secondary"
-        label="I agree to site terms and conditions"
-      ></v-checkbox>
-    </v-container>
-
-    <v-divider></v-divider>
-
-    <v-card-actions>
-      <v-spacer></v-spacer>
-
-      <v-btn color="success">
-        Complete Registration
-
-        <v-icon icon="mdi-chevron-right" end></v-icon>
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+        <v-btn
+          :disabled="!form"
+          :loading="loading"
+          block
+          color="success"
+          size="large"
+          type="submit"
+          variant="elevated"
+        >
+          Đăng ký
+        </v-btn>
+      </v-form>
+    </v-card>
+  </v-sheet>
 </template>

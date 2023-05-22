@@ -1,14 +1,7 @@
 <script lang="ts" setup>
-interface Teachers {
-  id: Number;
-  fullName: string;
-  birthday: string;
-  gender: string;
-  phoneNumber: string;
-  email: string;
-}
+import { UserInfo } from "@/types";
 
-const teachers: Teachers[] = [
+const teachers: UserInfo[] = [
   {
     id: 1,
     fullName: "Nguyễn Hồng Phúc",
