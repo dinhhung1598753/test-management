@@ -53,6 +53,7 @@ const isAllSubjects = (item: any) => {
     </div>
     <v-btn class="button">Tìm kiếm</v-btn>
   </div>
+  <h3 class="tested">Danh sách môn đã thi</h3>
   <div class="subject-list">
     <div class="item">
       <div class="subject">
@@ -176,7 +177,10 @@ const isAllSubjects = (item: any) => {
     margin-bottom: 24px;
   }
 }
-
+.tested {
+  margin-top: 32px;
+  padding-left: 16px;
+}
 .test-exams > .nav {
   width: 80%;
   display: flex;
@@ -230,12 +234,15 @@ const isAllSubjects = (item: any) => {
 .subject-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin-top: 12px;
+  padding: 16px;
   gap: 16px;
+  background-color: #f8f9fa;
   .item {
     border-radius: 8px;
     box-shadow: 0 2px 0 0 rgba(143, 156, 173, 0.2);
-    border: 1px solid #ccc;
+    border: 1px solid $color-gray;
+    background-color: $color-white;
     padding: 16px;
     cursor: pointer;
   }

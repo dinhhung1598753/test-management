@@ -1,3 +1,3 @@
 <template>
-  <h2>thi online cho sv ne</h2>
+  <h2>Danh sách bài tập/thi</h2>
 </template>
