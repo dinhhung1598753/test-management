@@ -73,7 +73,9 @@ const isAllSubjects = (item: any) => {
         <span class="label"> 60 câu</span>
       </div>
       <div class="action">
-        <v-btn variant="outlined">Xem chi tiết</v-btn>
+        <v-btn variant="outlined" class="search">
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
+        >
       </div>
     </div>
     <div class="item">
@@ -94,7 +96,9 @@ const isAllSubjects = (item: any) => {
         <span class="label"> 60 câu</span>
       </div>
       <div class="action">
-        <v-btn variant="outlined">Xem chi tiết</v-btn>
+        <v-btn variant="outlined" class="search">
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
+        >
       </div>
     </div>
     <div class="item">
@@ -115,7 +119,9 @@ const isAllSubjects = (item: any) => {
         <span class="label"> 60 câu</span>
       </div>
       <div class="action">
-        <v-btn variant="outlined">Xem chi tiết</v-btn>
+        <v-btn variant="outlined" class="search">
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
+        >
       </div>
     </div>
     <div class="item">
@@ -136,7 +142,9 @@ const isAllSubjects = (item: any) => {
         <span class="label"> 60 câu</span>
       </div>
       <div class="action">
-        <v-btn variant="outlined">Xem chi tiết</v-btn>
+        <v-btn variant="outlined" class="search">
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
+        >
       </div>
     </div>
     <div class="item">
@@ -157,7 +165,9 @@ const isAllSubjects = (item: any) => {
         <span class="label"> 60 câu</span>
       </div>
       <div class="action">
-        <v-btn variant="outlined">Xem chi tiết</v-btn>
+        <v-btn variant="outlined" class="search">
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
+        >
       </div>
     </div>
   </div>
@@ -265,6 +275,10 @@ const isAllSubjects = (item: any) => {
   .item > .action {
     display: flex;
     justify-content: center;
+    .link {
+      text-decoration: none;
+      color: #2196f3;
+    }
   }
 }
 </style>
