@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
-  layout: "auth",
-});
+  layout: 'auth',
+})
 </script>
 
 <template>
@@ -15,7 +15,7 @@ definePageMeta({
           class="mb-2"
           clearable
           label="Nhập email"
-        ></v-text-field>
+        />
 
         <v-text-field
           v-model="password"
@@ -24,9 +24,9 @@ definePageMeta({
           clearable
           label="Nhập mật"
           placeholder="Nhập mật khẩu"
-        ></v-text-field>
+        />
 
-        <br />
+        <br>
 
         <v-btn
           :disabled="!form"

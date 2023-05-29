@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-const pageContainer = ref<HTMLElement>();
+const pageContainer = ref<HTMLElement>()
 
-const nuxtApp = useNuxtApp();
-nuxtApp.hook("page:finish", () => {
-  pageContainer.value?.scroll(0, 0);
-});
+const nuxtApp = useNuxtApp()
+nuxtApp.hook('page:finish', () => {
+  pageContainer.value?.scroll(0, 0)
+})
 </script>
 <template>
   <div class="app-layout">

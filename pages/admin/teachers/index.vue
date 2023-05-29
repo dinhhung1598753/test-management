@@ -1,59 +1,71 @@
 <script lang="ts" setup>
-import { UserInfo } from "@/types";
+import { UserInfo } from '@/types'
 
 const teachers: UserInfo[] = [
   {
     id: 1,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
+    fullName: 'Nguyễn Hồng Phúc',
+    birthday: '22/10/2000',
+    gender: 'Nữ',
+    phoneNumber: '0975256563',
+    email: 'nguyenhonghanh@gmail.com',
   },
   {
     id: 2,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
+    fullName: 'Nguyễn Hồng Phúc',
+    birthday: '22/10/2000',
+    gender: 'Nữ',
+    phoneNumber: '0975256563',
+    email: 'nguyenhonghanh@gmail.com',
   },
   {
     id: 3,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
+    fullName: 'Nguyễn Hồng Phúc',
+    birthday: '22/10/2000',
+    gender: 'Nữ',
+    phoneNumber: '0975256563',
+    email: 'nguyenhonghanh@gmail.com',
   },
   {
     id: 4,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
+    fullName: 'Nguyễn Hồng Phúc',
+    birthday: '22/10/2000',
+    gender: 'Nữ',
+    phoneNumber: '0975256563',
+    email: 'nguyenhonghanh@gmail.com',
   },
   {
     id: 5,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
+    fullName: 'Nguyễn Hồng Phúc',
+    birthday: '22/10/2000',
+    gender: 'Nữ',
+    phoneNumber: '0975256563',
+    email: 'nguyenhonghanh@gmail.com',
   },
-];
+]
 </script>
 <template>
-  <h2 class="teacher-info">Thông tin giáo viên</h2>
+  <h2 class="teacher-info">
+    Thông tin giáo viên
+  </h2>
   <v-table>
     <thead>
       <tr>
-        <th class="text-left">Họ và tên</th>
-        <th class="text-left">Năm sinh</th>
-        <th class="text-left">Giới tính</th>
-        <th class="text-left">Điện thoại</th>
-        <th class="text-left">Email</th>
+        <th class="text-left">
+          Họ và tên
+        </th>
+        <th class="text-left">
+          Năm sinh
+        </th>
+        <th class="text-left">
+          Giới tính
+        </th>
+        <th class="text-left">
+          Điện thoại
+        </th>
+        <th class="text-left">
+          Email
+        </th>
       </tr>
     </thead>
     <tbody>

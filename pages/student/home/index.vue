@@ -1,38 +1,42 @@
 <script lang="ts" setup>
 const subjects = [
-  { id: 1, label: "Tất cả", path: "/" },
-  { id: 2, label: "IELTS Academic", path: "/" },
-  { id: 3, label: "IELTS General", path: "/" },
-  { id: 4, label: "TOEIC", path: "/" },
-  { id: 5, label: "Tiếng Anh THPTQG", path: "/" },
-  { id: 6, label: "Toán THPTQG", path: "/" },
-  { id: 7, label: "Địa lí THPTQG", path: "/" },
-  { id: 8, label: "Vật lí THPTQG", path: "/" },
-  { id: 9, label: "Sinh học THPTQG", path: "/" },
-  { id: 10, label: "Lịch sử THPTQG", path: "/" },
-  { id: 11, label: "Toán cao cấp", path: "/" },
-  { id: 12, label: "Giải tích", path: "/" },
-];
+  { id: 1, label: 'Tất cả', path: '/' },
+  { id: 2, label: 'IELTS Academic', path: '/' },
+  { id: 3, label: 'IELTS General', path: '/' },
+  { id: 4, label: 'TOEIC', path: '/' },
+  { id: 5, label: 'Tiếng Anh THPTQG', path: '/' },
+  { id: 6, label: 'Toán THPTQG', path: '/' },
+  { id: 7, label: 'Địa lí THPTQG', path: '/' },
+  { id: 8, label: 'Vật lí THPTQG', path: '/' },
+  { id: 9, label: 'Sinh học THPTQG', path: '/' },
+  { id: 10, label: 'Lịch sử THPTQG', path: '/' },
+  { id: 11, label: 'Toán cao cấp', path: '/' },
+  { id: 12, label: 'Giải tích', path: '/' },
+]
 
 const isAllSubjects = (item: any) => {
-  return item === subjects[0];
-};
+  return item === subjects[0]
+}
+const search = ref()
 </script>
 
 <template>
-  <h2 class="title">Chào mừng Nguyễn Ngọc Bảo Châm!</h2>
+  <h2 class="title">
+    Chào mừng Nguyễn Ngọc Bảo Châm!
+  </h2>
   <div class="subject-search">
     <!--TODO: Add some subjects from BE-->
-    <h3 class="label">Thư viện đề thi</h3>
+    <h3 class="label">
+      Thư viện đề thi
+    </h3>
     <div class="test-exams">
       <ul class="nav">
-        <li class="item" v-for="subject in subjects" :key="subject.id">
+        <li v-for="subject in subjects" :key="subject.id" class="item">
           <a
             class="link"
             :class="{ '-active': isAllSubjects(subject) }"
             :href="subject.path"
-            >{{ subject.label }}</a
-          >
+          >{{ subject.label }}</a>
         </li>
       </ul>
     </div>
@@ -43,17 +47,21 @@ const isAllSubjects = (item: any) => {
         single-line
         hide-details
         class="search"
-      ></v-text-field>
+      />
       <v-select
         label="--Chọn bộ đề thi--"
         :items="['Chương 1', 'Chương 2', 'Chương 3', 'Chương 4']"
         class="select"
         :variant="'outlined'"
-      ></v-select>
+      />
     </div>
-    <v-btn class="button">Tìm kiếm</v-btn>
+    <v-btn class="button">
+      Tìm kiếm
+    </v-btn>
   </div>
-  <h3 class="tested">Danh sách môn đã thi</h3>
+  <h3 class="tested">
+    Danh sách môn đã thi
+  </h3>
   <div class="subject-list">
     <div class="item">
       <div class="subject">
@@ -74,8 +82,8 @@ const isAllSubjects = (item: any) => {
       </div>
       <div class="action">
         <v-btn variant="outlined" class="search">
-          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
-        >
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a>
+        </v-btn>
       </div>
     </div>
     <div class="item">
@@ -97,8 +105,8 @@ const isAllSubjects = (item: any) => {
       </div>
       <div class="action">
         <v-btn variant="outlined" class="search">
-          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
-        >
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a>
+        </v-btn>
       </div>
     </div>
     <div class="item">
@@ -120,8 +128,8 @@ const isAllSubjects = (item: any) => {
       </div>
       <div class="action">
         <v-btn variant="outlined" class="search">
-          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
-        >
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a>
+        </v-btn>
       </div>
     </div>
     <div class="item">
@@ -143,8 +151,8 @@ const isAllSubjects = (item: any) => {
       </div>
       <div class="action">
         <v-btn variant="outlined" class="search">
-          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
-        >
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a>
+        </v-btn>
       </div>
     </div>
     <div class="item">
@@ -166,8 +174,8 @@ const isAllSubjects = (item: any) => {
       </div>
       <div class="action">
         <v-btn variant="outlined" class="search">
-          <a class="link" :href="'/student/tests'">Xem chi tiết</a></v-btn
-        >
+          <a class="link" :href="'/student/tests'">Xem chi tiết</a>
+        </v-btn>
       </div>
     </div>
   </div>

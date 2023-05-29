@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import blankAvatar from "@/assets/images/blank-avatar.png";
+import blankAvatar from '@/assets/images/blank-avatar.png'
 </script>
 
 <template>
   <nav class="nav-bar">
-    <h1 class="title">Test Management</h1>
+    <h1 class="title">
+      Test Management
+    </h1>
     <div class="avatar">
       <img
         class="image"
@@ -12,7 +14,7 @@ import blankAvatar from "@/assets/images/blank-avatar.png";
         alt="avatar"
         width="40"
         height="40"
-      />
+      >
     </div>
   </nav>
 </template>

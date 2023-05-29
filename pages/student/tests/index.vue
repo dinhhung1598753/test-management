@@ -1,34 +1,46 @@
 <script lang="ts" setup>
-const checkbox1 = ref(true); // TODO
-const checkbox2 = ref(false); // TODO
-const checkbox3 = ref(false); // TODO
-const checkbox4 = ref(false); // TODO
+const checkbox1 = ref(true) // TODO
+const checkbox2 = ref(false) // TODO
+const checkbox3 = ref(false) // TODO
+const checkbox4 = ref(false) // TODO
 
-const tab = ref(null);
+const tab = ref(null)
 </script>
 <template>
-  <h2 class="title">Thư viện đề thi</h2>
+  <h2 class="title">
+    Thư viện đề thi
+  </h2>
   <div class="online-exam-information">
     <div class="header">
-      <h2 class="name">C17 IELTS listening test 1</h2>
+      <h2 class="name">
+        C17 IELTS listening test 1
+      </h2>
       <div class="options">
-        <p class="item -active">Thông tin đề thi</p>
-        <p class="item">Đáp án/transcript</p>
+        <p class="item -active">
+          Thông tin đề thi
+        </p>
+        <p class="item">
+          Đáp án/transcript
+        </p>
       </div>
     </div>
 
     <div class="tab-content">
       <div class="item">
-        <h3 class="label">Bộ đề thi:</h3>
-        <h3 class="content">IELTS C17 Full Test 1</h3>
+        <h3 class="label">
+          Bộ đề thi:
+        </h3>
+        <h3 class="content">
+          IELTS C17 Full Test 1
+        </h3>
       </div>
       <div class="detail">
-        <v-icon icon="mdi-clock"></v-icon>
+        <v-icon icon="mdi-clock" />
         <span class="label">Thời gian làm bài:</span>
         <span class="content">40 phút</span>
       </div>
       <div class="detail">
-        <v-icon icon="mdi-pencil"></v-icon>
+        <v-icon icon="mdi-pencil" />
         <span class="label">Số lượng:</span>
         <span class="content">20 câu</span>
       </div>
@@ -37,9 +49,13 @@ const tab = ref(null);
     <div class="nav-info">
       <v-card class="card">
         <v-tabs v-model="tab" centered stacked class="tabs">
-          <v-tab value="tab-1"> Luyện tập </v-tab>
+          <v-tab value="tab-1">
+            Luyện tập
+          </v-tab>
 
-          <v-tab value="tab-2"> Làm full test </v-tab>
+          <v-tab value="tab-2">
+            Làm full test
+          </v-tab>
         </v-tabs>
 
         <v-window v-model="tab">
@@ -53,35 +69,37 @@ const tab = ref(null);
                   vì phải chịu áp lực hoàn thành bài thi.
                 </div>
                 <div class="choice">
-                  <p class="heading">Chọn phần thi bạn muốn làm</p>
+                  <p class="heading">
+                    Chọn phần thi bạn muốn làm
+                  </p>
                   <v-container fluid>
                     <div class="wrap">
                       <v-checkbox
-                        class="checkbox"
                         v-model="checkbox1"
+                        class="checkbox"
                         :label="'Chương 1'"
-                      ></v-checkbox>
+                      />
                       <span class="count">Gồm 10 câu hỏi</span>
                     </div>
                     <div class="wrap">
                       <v-checkbox
                         v-model="checkbox2"
                         :label="'Chương 2'"
-                      ></v-checkbox>
+                      />
                       <span class="count">Gồm 10 câu hỏi</span>
                     </div>
                     <div class="wrap">
                       <v-checkbox
                         v-model="checkbox3"
                         :label="'Chương 3'"
-                      ></v-checkbox>
+                      />
                       <span class="count">Gồm 10 câu hỏi</span>
                     </div>
                     <div class="wrap">
                       <v-checkbox
                         v-model="checkbox4"
                         :label="'Chương 4'"
-                      ></v-checkbox>
+                      />
                       <span class="count">Gồm 10 câu hỏi</span>
                     </div>
                   </v-container>
@@ -96,9 +114,11 @@ const tab = ref(null);
                     :items="['10 phút', '30 phút', '60 phút', '120 phút']"
                     class="select"
                     :variant="'outlined'"
-                  ></v-select>
+                  />
 
-                  <v-btn class="button">Luyện tập</v-btn>
+                  <v-btn class="button">
+                    Luyện tập
+                  </v-btn>
                 </div>
               </v-card-text>
             </v-card>
@@ -114,9 +134,7 @@ const tab = ref(null);
 
                 <div class="time">
                   <v-btn class="button">
-                    <a class="link" :href="'/student/online-exam'"
-                      >Bắt đầu thi</a
-                    >
+                    <a class="link" :href="'/student/online-exam'">Bắt đầu thi</a>
                   </v-btn>
                 </div>
               </v-card-text>

@@ -4,117 +4,129 @@ const questions = [
   {
     id: 1,
     order: 1,
-    question: "Why does the man want to buy Ms. Jefferson some flowers?",
+    question: 'Why does the man want to buy Ms. Jefferson some flowers?',
     answers: [
       {
         id: 1,
-        label: "A. She was promoted.",
+        label: 'A. She was promoted.',
       },
       {
         id: 2,
-        label: "B. She won an award.",
+        label: 'B. She won an award.',
       },
       {
         id: 3,
-        label: "C. She is moving.",
+        label: 'C. She is moving.',
       },
       {
         id: 4,
-        label: "D. She is retiring.",
+        label: 'D. She is retiring.',
       },
     ],
   },
   {
     id: 2,
     order: 2,
-    question: "Why does the man want to buy Ms. Jefferson some flowers?",
+    question: 'Why does the man want to buy Ms. Jefferson some flowers?',
     answers: [
       {
         id: 1,
-        label: "A. She was promoted.",
+        label: 'A. She was promoted.',
       },
       {
         id: 2,
-        label: "B. She won an award.",
+        label: 'B. She won an award.',
       },
       {
         id: 3,
-        label: "C. She is moving.",
+        label: 'C. She is moving.',
       },
       {
         id: 4,
-        label: "D. She is retiring.",
+        label: 'D. She is retiring.',
       },
     ],
   },
   {
     id: 3,
     order: 3,
-    question: "Why does the man want to buy Ms. Jefferson some flowers?",
+    question: 'Why does the man want to buy Ms. Jefferson some flowers?',
     answers: [
       {
         id: 1,
-        label: "A. She was promoted.",
+        label: 'A. She was promoted.',
       },
       {
         id: 2,
-        label: "B. She won an award.",
+        label: 'B. She won an award.',
       },
       {
         id: 3,
-        label: "C. She is moving.",
+        label: 'C. She is moving.',
       },
       {
         id: 4,
-        label: "D. She is retiring.",
+        label: 'D. She is retiring.',
       },
     ],
   },
-];
+]
 
-const currentTime = ref("");
+const currentTime = ref('')
 
 onMounted(() => {
   setInterval(() => {
-    currentTime.value = new Date().toLocaleTimeString();
-  }, 1000);
+    currentTime.value = new Date().toLocaleTimeString()
+  }, 1000)
   // TODO
-});
+})
 </script>
 
 <template>
   <div class="heading">
-    <h2 class="name">C17 IELTS listening test 1</h2>
-    <button class="button">Thoát</button>
+    <h2 class="name">
+      C17 IELTS listening test 1
+    </h2>
+    <button class="button">
+      Thoát
+    </button>
   </div>
   <div class="test-wrapper">
     <div class="test-content">
       <div
-        class="question-wrapper"
         v-for="question in questions"
         :key="question.id"
+        class="question-wrapper"
       >
-        <div class="order">{{ question.order }}</div>
+        <div class="order">
+          {{ question.order }}
+        </div>
         <div class="content">
           <span class="text">
             {{ question.question }}
           </span>
           <div class="answers">
             <v-radio-group
-              class="radio"
               v-for="answer in question.answers"
               :key="answer.id"
+              class="radio"
             >
-              <v-radio :label="answer.label" :value="answer.id"></v-radio>
+              <v-radio :label="answer.label" :value="answer.id" />
             </v-radio-group>
           </div>
         </div>
       </div>
     </div>
     <div class="test-navigation">
-      <h3 class="timeleft">Thời gian làm bài:</h3>
-      <div class="time">{{ currentTime }}</div>
-      <button class="submit">Nộp bài</button>
+      <h3 class="timeleft">
+        Thời gian làm bài:
+      </h3>
+      <div class="time">
+        {{ currentTime }}
+      </div>
+      <button class="submit">
+        Nộp bài
+      </button>
     </div>
   </div>
 </template>
