@@ -14,7 +14,8 @@ definePageMeta({
           :rules="[required]"
           class="mb-2"
           clearable
-          label="Nhập email"
+          label="Nhập username"
+          placeholder="Nhập username"
         ></v-text-field>
 
         <v-text-field
@@ -22,7 +23,7 @@ definePageMeta({
           :readonly="loading"
           :rules="[required]"
           clearable
-          label="Nhập mật"
+          label="Nhập mật khẩu"
           placeholder="Nhập mật khẩu"
         ></v-text-field>
 

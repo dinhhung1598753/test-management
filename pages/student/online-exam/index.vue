@@ -72,13 +72,26 @@ const questions = [
   },
 ];
 
-const currentTime = ref("");
+const minutes = ref(0);
+const seconds = ref(0);
+
+const formatTime = (time: number) => {
+  return time < 10 ? `0${time}` : `${time}`;
+};
+
+const incrementTime = () => {
+  seconds.value++;
+
+  if (seconds.value === 60) {
+    seconds.value = 0;
+    minutes.value++;
+  }
+};
 
 onMounted(() => {
   setInterval(() => {
-    currentTime.value = new Date().toLocaleTimeString();
+    incrementTime();
   }, 1000);
-  // TODO
 });
 </script>
 
@@ -113,7 +126,9 @@ onMounted(() => {
     </div>
     <div class="test-navigation">
       <h3 class="timeleft">Thời gian làm bài:</h3>
-      <div class="time">{{ currentTime }}</div>
+      <div class="time">
+        {{ `${formatTime(minutes)}:${formatTime(seconds)}` }}
+      </div>
       <button class="submit">Nộp bài</button>
     </div>
   </div>
