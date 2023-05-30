@@ -21,7 +21,9 @@ const props = defineProps({
         width="200"
         height="200"
       />
-      <v-btn variant="outlined" class="button"> Chọn ảnh mới </v-btn>
+      <v-btn variant="outlined" class="button"
+        ><v-icon icon="mdi-camera" /> Chọn ảnh mới
+      </v-btn>
     </div>
 
     <div class="wrap">
