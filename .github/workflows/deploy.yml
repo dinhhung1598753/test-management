@@ -1,0 +1,36 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: your-ecr-repository:latest
+          registry: your-ecr-repository
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: SSH into EC2 instance and deploy
+        uses: appleboy/ssh-action@v0.2.0
+        with:
+          host: your-ec2-instance-ip
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker stop your-container-name || true
+            docker rm your-container-name || true
+            docker pull your-ecr-repository:latest
+            docker run -d -p 80:80 --name your-container-name your-ecr-repository:latest
