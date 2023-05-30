@@ -98,7 +98,7 @@ onMounted(() => {
 <template>
   <div class="heading">
     <h2 class="name">C17 IELTS listening test 1</h2>
-    <button class="button">Thoát</button>
+    <button class="button">Thoát <v-icon icon="mdi-arrow-right" /></button>
   </div>
   <div class="test-wrapper">
     <div class="test-content">
