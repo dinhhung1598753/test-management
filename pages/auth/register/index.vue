@@ -17,9 +17,10 @@ const onSubmit = async ()=>{
 
 const requiredName = (v: any) => !!v || `Full name is required`
 const requiredEmail = (v: any) => {
-  if(!v ) return true
-  if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(v)) return true
-  return 'Must be a valid e-mail.'
+//   if(!v ) return true
+//   if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(v)) return true
+//   return 'Must be a valid e-mail.'
+ return true
 }
 const requiredPassword = (v: any) => !!v || `Password is required`
 

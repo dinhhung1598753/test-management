@@ -1,48 +1,55 @@
 <script lang="ts" setup>
 import { UserInfo } from "@/types";
+import {getTeachers} from '@/models/teacher'
 
-const teachers: UserInfo[] = [
-  {
-    id: 1,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 2,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 3,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 4,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 5,
-    fullName: "Nguyễn Hồng Phúc",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-];
+const teachers = ref<UserInfo[]>()
+
+const res = await getTeachers()
+console.log(123, res)
+teachers.value = res?.data || []
+
+// const teachers: UserInfo[] = [
+//   {
+//     id: 1,
+//     fullName: "Nguyễn Hồng Phúc",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 2,
+//     fullName: "Nguyễn Hồng Phúc",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 3,
+//     fullName: "Nguyễn Hồng Phúc",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 4,
+//     fullName: "Nguyễn Hồng Phúc",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 5,
+//     fullName: "Nguyễn Hồng Phúc",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+// ];
 </script>
 <template>
   <h2 class="teacher-info">Thông tin giáo viên</h2>

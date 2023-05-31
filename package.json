@@ -4,7 +4,7 @@
   "name": "test-management",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port=3000",
     "setup": "yarn setup:create-env",
     "setup:create-env": "cp .env.template .env",
     "lint": "eslint --ext .ts,.js,.vue .",
