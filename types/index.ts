@@ -1,5 +1,5 @@
 export interface UserInfo {
-  id: Number;
+  id: number;
   fullName: string;
   birthday: string;
   gender: string;
@@ -12,6 +12,21 @@ export interface MenuItem {
   title: string;
   icon: string;
   path?: string;
+}
+
+export interface Question {
+  id: number;
+  order: number;
+  subjectName: string;
+  question: string;
+  imageQuestion?: string;
+  chapter: string;
+  level: string;
+  answers: {
+    id: number;
+    label: string;
+    isCorrect?: boolean;
+  }[];
 }
 
 // constants
