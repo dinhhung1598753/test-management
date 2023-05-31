@@ -1,7 +1,28 @@
 <script lang="ts" setup>
+import {signUp } from '@/models/auth'
+
 definePageMeta({
   layout: "auth",
 });
+
+const form = ref()
+const username = ref('')
+const email = ref('')
+const password = ref('')
+
+const onSubmit = async ()=>{
+  if(!form) return
+  const res = await signUp(username.value, email.value, password.value)
+}
+
+const requiredName = (v: any) => !!v || `Full name is required`
+const requiredEmail = (v: any) => {
+  if(!v ) return true
+  if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(v)) return true
+  return 'Must be a valid e-mail.'
+}
+const requiredPassword = (v: any) => !!v || `Password is required`
+
 </script>
 
 <template>
@@ -10,8 +31,7 @@ definePageMeta({
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model="username"
-          :readonly="loading"
-          :rules="[required]"
+          :rules="[requiredName]"
           class="mb-2"
           clearable
           label="Nhập họ và tên"
@@ -19,8 +39,7 @@ definePageMeta({
 
         <v-text-field
           v-model="email"
-          :readonly="loading"
-          :rules="[required]"
+          :rules="[requiredEmail]"
           class="mb-2"
           clearable
           label="Nhập email"
@@ -28,8 +47,7 @@ definePageMeta({
 
         <v-text-field
           v-model="password"
-          :readonly="loading"
-          :rules="[required]"
+          :rules="[requiredPassword]"
           clearable
           label="Nhập mật khẩu"
           placeholder="Nhập mật khẩu"
@@ -39,7 +57,6 @@ definePageMeta({
 
         <v-btn
           :disabled="!form"
-          :loading="loading"
           block
           color="success"
           size="large"
