@@ -5,6 +5,11 @@ const nuxtApp = useNuxtApp();
 nuxtApp.hook("page:finish", () => {
   pageContainer.value?.scroll(0, 0);
 });
+
+definePageMeta({
+  middleware: ['auth'],
+});
+
 </script>
 <template>
   <div class="app-layout">

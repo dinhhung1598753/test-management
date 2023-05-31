@@ -1,7 +1,22 @@
 <script lang="ts" setup>
+import {signin } from '@/models/auth'
 definePageMeta({
   layout: "auth",
 });
+const form = ref()
+const username = ref('')
+const password = ref('')
+
+const onSubmit = async ()=>{
+  if(!form) return
+  const res = await signin(username.value, password.value)
+  console.log(res)
+}
+
+const requiredName = (v: any) => !!v || `Full name is required`
+
+const requiredPassword = (v: any) => !!v || `Password is required`
+
 </script>
 
 <template>
@@ -9,9 +24,8 @@ definePageMeta({
     <v-card class="mx-auto px-6 py-8" max-width="344">
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
-          v-model="email"
-          :readonly="loading"
-          :rules="[required]"
+          v-model="username"
+          :rules="[requiredName]"
           class="mb-2"
           clearable
           label="Nhập username"
@@ -20,8 +34,7 @@ definePageMeta({
 
         <v-text-field
           v-model="password"
-          :readonly="loading"
-          :rules="[required]"
+          :rules="[requiredPassword]"
           clearable
           label="Nhập mật khẩu"
           placeholder="Nhập mật khẩu"
@@ -31,7 +44,6 @@ definePageMeta({
 
         <v-btn
           :disabled="!form"
-          :loading="loading"
           block
           color="success"
           size="large"
