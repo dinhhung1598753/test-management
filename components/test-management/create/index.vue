@@ -92,6 +92,9 @@ const questions: Question[] = [
     ],
   },
 ];
+const subjects = ["Giải tích", "Lập trình C++", "Đại số", "CTDL & GT"];
+const chapters = ["Chương 1", "Chương 2", "Chương 3"];
+const levels = ["Dễ", "Trung bình", "Khó"];
 
 const isCreateQuestion = ref(false);
 const isDeleteQuestion = ref(false);
@@ -124,8 +127,8 @@ const deleteQuestion = () => {
       @create="createQuestion"
       @delete="deleteQuestion"
     />
-
-    <div class="dialog-update-question">
+    <test-management-update />
+    <div class="dialog-create-question">
       <v-row justify="center">
         <v-dialog v-model="isCreateQuestion" persistent width="1024">
           <v-card>
@@ -138,7 +141,7 @@ const deleteQuestion = () => {
                   <v-col cols="12" sm="6" md="4">
                     <v-select
                       label="Môn học"
-                      :items="['Môn 1', 'Môn 2', 'Môn 3', 'Môn 4']"
+                      :items="subjects"
                       class="select"
                       :variant="'outlined'"
                     ></v-select>
@@ -146,7 +149,7 @@ const deleteQuestion = () => {
                   <v-col cols="12" sm="6" md="4">
                     <v-select
                       label="Bộ đề"
-                      :items="['Chương 1', 'Chương 2', 'Chương 3', 'Chương 4']"
+                      :items="chapters"
                       class="select"
                       :variant="'outlined'"
                     ></v-select>
@@ -154,7 +157,7 @@ const deleteQuestion = () => {
                   <v-col cols="12" sm="6" md="4">
                     <v-select
                       label="Độ khó"
-                      :items="['Dễ', 'Trung Bình', 'Khó']"
+                      :items="levels"
                       class="select"
                       :variant="'outlined'"
                     ></v-select>
