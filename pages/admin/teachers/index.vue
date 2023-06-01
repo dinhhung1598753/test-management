@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { UserInfo } from "@/types";
+import { getTeachers } from "@/models/teacher";
 
 const teachers: UserInfo[] = [
   {

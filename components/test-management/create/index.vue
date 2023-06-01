@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-const questions = [
+import { Question } from "@/types";
+const questions: Question[] = [
   {
     id: 1,
     order: 1,
@@ -98,7 +99,7 @@ const isDeleteQuestion = ref(false);
 const createQuestion = () => {
   isCreateQuestion.value = true;
 };
-
+const authUser = ref("teacher");
 const deleteQuestion = () => {
   isDeleteQuestion.value = true;
 };
@@ -117,37 +118,12 @@ const deleteQuestion = () => {
       ></v-file-input>
     </div>
 
-    <div class="list-questions">
-      <v-table>
-        <thead>
-          <tr>
-            <th></th>
-            <th class="text-left">STT</th>
-            <th class="text-left">Môn học</th>
-            <th class="text-left">Bộ đề</th>
-            <th class="text-left">Câu hỏi</th>
-            <th class="text-left">Độ khó</th>
-            <th class="text-left">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="question in questions" :key="question.id">
-            <td><v-checkbox-btn /></td>
-            <td>{{ question.id }}</td>
-            <td>{{ question.subjectName }}</td>
-            <td>{{ question.chapter }}</td>
-            <td>{{ question.question }}</td>
-            <td>{{ question.level }}</td>
-            <td class="action">
-              <v-icon size="small" class="me-2" @click="createQuestion">
-                mdi-pencil
-              </v-icon>
-              <v-icon size="small" @click="deleteQuestion"> mdi-delete </v-icon>
-            </td>
-          </tr>
-        </tbody>
-      </v-table>
-    </div>
+    <test-management-list
+      :questions="questions"
+      :auth-user="authUser"
+      @create="createQuestion"
+      @delete="deleteQuestion"
+    />
 
     <div class="dialog-update-question">
       <v-row justify="center">
