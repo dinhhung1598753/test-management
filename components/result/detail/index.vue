@@ -8,42 +8,79 @@ const resultDetail = [
   {
     id: 1,
     order: 1,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "A",
     resultKey: "A",
+    titleKey:
+      " (84) The Clark Institute is offering Internet classes to train you on these new rules.Dịch: Viện Clark đang cung cấp các lớp học Internet để đào tạo bạn về các quy tắc mới này. Điều gì đang được quảng cáo?",
     isCorrect: true,
   },
   {
     id: 2,
     order: 2,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "A",
     resultKey: "B",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: false,
   },
   {
     id: 3,
     order: 3,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "C",
     resultKey: "C",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: true,
   },
   {
     id: 4,
     order: 4,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "B",
     resultKey: "B",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: true,
   },
   {
     id: 5,
     order: 5,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "A",
     resultKey: "C",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: false,
   },
   {
     id: 6,
     order: 6,
+    question: "What still needs to be confirmed?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "C",
+    titleKey: "Vì nó đúng hihih",
     resultKey: "C",
     isCorrect: true,
   },
@@ -51,20 +88,38 @@ const resultDetail = [
     id: 7,
     order: 7,
     answerKey: "B",
+    question: "What still needs to be confirmed?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     resultKey: "B",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: true,
   },
   {
     id: 8,
     order: 8,
+    question: "Are you sure you want to?",
+    answer1: "A. The event location",
+    answer2: "B. The registration fee",
+    answer3: "C. The start time",
+    answer4: "D. The catering arrangements",
     answerKey: "A",
     resultKey: "C",
+    titleKey: "Vì nó đúng hihih",
     isCorrect: false,
   },
 ];
+const resultDetailQuestion = ref(null);
 
-const openResultDetail = () => {
+const openResultDetail = (result: any) => {
+  resultDetailQuestion.value = result;
   isOpenDialog.value = true;
+};
+
+const closeDialog = () => {
+  isOpenDialog.value = false;
 };
 </script>
 
@@ -138,26 +193,15 @@ const openResultDetail = () => {
           icon="mdi-close"
           class="wrong"
         ></v-icon>
-        <span class="detail" @click="openResultDetail">[Chi tiết]</span>
+        <span class="detail" @click="openResultDetail(result)">[Chi tiết]</span>
       </div>
     </div>
   </div>
-
-  <div class="dialog">
-    <v-dialog v-model="isOpenDialog" width="auto">
-      <v-card>
-        <v-card-text>
-          trong này có chi tiết từng câu hỏi nhé@@@@ nhưng mai làm tiếp giờ đi
-          ngủ ==
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" block @click="isOpenDialog = false"
-            >Đóng</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+  <result-detail-dialog
+    :isOpenDialog="isOpenDialog"
+    :close-dialog="closeDialog"
+    :resultDetailQuestion="resultDetailQuestion"
+  />
 </template>
 <style lang="scss" scoped>
 .title {
