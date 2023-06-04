@@ -29,6 +29,13 @@ export interface Question {
   }[];
 }
 
+export interface ExamResult {
+  id: number;
+  examCompletionDate: string;
+  examName: string;
+  result: string;
+  examTime: string;
+}
 // constants
 
 export const AUTH_USER = {
