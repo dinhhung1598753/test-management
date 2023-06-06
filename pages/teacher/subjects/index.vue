@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-const subjects = [
-  { id: 1, name: "Toán", createAt: "22-02-2023" },
-  { id: 2, name: "Văn", createAt: "22-02-2023" },
-  { id: 3, name: "Anh", createAt: "22-02-2023" },
-  { id: 4, name: "Sử", createAt: "22-02-2023" },
-  { id: 5, name: "Sinh", createAt: "22-02-2023" },
-];
+import { Subject } from "@/types";
+import { getSubjects, create, updateById, deleteById } from "@/models/subject";
+
 const title = ref("");
-const order = ref("");
-const subjectName = ref("");
+const code = ref("");
+const description = ref("");
+const credit = ref(0);
+const titleSnack = ref("");
 const isShowSnack = ref(false);
 const isShowCreateSubjectForm = ref(false);
 const isDisabledCreateButton = ref(false);
@@ -22,25 +20,46 @@ const closeForm = () => {
   isShowCreateSubjectForm.value = false;
   isDisabledCreateButton.value = false;
 };
-const createSubject = (order: any, subjectName: string) => {
-  // TODO CALL API
+
+const subjects = ref<Subject[]>();
+// get
+const res = await getSubjects();
+subjects.value = res?.data || [];
+
+// create
+const createSubject = async () => {
+  const res = await create(
+    title.value,
+    code.value,
+    description.value,
+    credit.value
+  );
   isShowSnack.value = true;
-  title.value = "Thêm thành công";
+  titleSnack.value = "Thêm thành công";
   closeForm();
 };
 
-const editSubject = (subjectId: number, subjectName: string) => {
-  isShowSnack.value = true;
+//edit
+const editSubject = async (
+  id: number,
+  title: string,
+  code: string,
+  description: string,
+  credit: number
+) => {
+  const res = await updateById(id, title, code, description, credit);
 
-  // TODO: CALL API
-  title.value = "Sửa thành công";
+  isShowSnack.value = true;
+  titleSnack.value = "Sửa thành công";
 };
 
-const deleteSubject = (subjectId: number, subjectName: string) => {
-  isShowSnack.value = true;
+// delete
 
-  // TODO: CALL API
-  title.value = "Xoá thành công";
+const deleteSubject = async (id: number) => {
+  const res = await deleteById(id);
+
+  isShowSnack.value = true;
+  titleSnack.value = "Xoá thành công";
 };
 </script>
 <template>
@@ -52,13 +71,23 @@ const deleteSubject = (subjectId: number, subjectName: string) => {
     >
 
     <div class="form" v-if="isShowCreateSubjectForm">
-      <v-text-field v-model="order" label="Nhập STT" required></v-text-field>
       <v-text-field
-        v-model="subjectName"
+        v-model="title"
         label="Nhập tên môn"
         required
       ></v-text-field>
-      <v-btn @click="createSubject(order, subjectName)">Thêm</v-btn>
+      <v-text-field v-model="code" label="Nhập mã môn" required></v-text-field>
+      <v-text-field
+        v-model="description"
+        label="Nhập mô tả"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="credit"
+        label="Nhập số tín chỉ"
+        required
+      ></v-text-field>
+      <v-btn @click="createSubject">Thêm</v-btn>
       <v-btn @click="closeForm">Đóng</v-btn>
     </div>
   </div>
@@ -69,26 +98,45 @@ const deleteSubject = (subjectId: number, subjectName: string) => {
       <tr class="row-head">
         <th class="cell text-center">STT</th>
         <th class="cell text-center">Tên môn học</th>
-        <th class="cell text-center">Ngày tạo</th>
-        <th class="cell text-center">Hành động</th>
+        <th class="cell text-center">Mã môn</th>
+        <th class="cell text-center">Mô tả</th>
+        <th class="cell text-center">Số tín chỉ</th>
+        <th class="cell text-center"></th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="subject in subjects" :key="subject.id">
         <td class="text-center">{{ subject.id }}</td>
-        <td class="text-center">
-          <v-text-field v-model="subject.name"></v-text-field>
+        <td class="text-center" width="400px">
+          <v-text-field v-model="subject.title"></v-text-field>
         </td>
-        <td class="text-center">{{ subject.createAt }}</td>
+        <td class="text-center" width="150px">
+          <v-text-field v-model="subject.code"></v-text-field>
+        </td>
+
+        <td class="text-center" width="300px">
+          <v-text-field v-model="subject.description"></v-text-field>
+        </td>
+        <td class="text-center" width="100px">
+          <v-text-field v-model="subject.credit"></v-text-field>
+        </td>
         <td class="action text-center">
           <v-icon
             size="small"
             class="me-2"
-            @click="editSubject(subject.id, subject.name)"
+            @click="
+              editSubject(
+                subject.id,
+                subject.title,
+                subject.code,
+                subject.description,
+                subject.credit
+              )
+            "
           >
             mdi-pencil
           </v-icon>
-          <v-icon size="small" @click="deleteSubject(subject.id, subject.name)">
+          <v-icon size="small" @click="deleteSubject(subject.id)">
             mdi-delete
           </v-icon>
         </td>
@@ -99,7 +147,7 @@ const deleteSubject = (subjectId: number, subjectName: string) => {
   <template>
     <div class="text-center ma-2">
       <v-snackbar v-model="isShowSnack" :timeout="1200" :color="'#2196F3'">
-        {{ title }}
+        {{ titleSnack }}
       </v-snackbar>
     </div>
   </template>

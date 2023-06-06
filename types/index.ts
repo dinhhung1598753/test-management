@@ -36,6 +36,17 @@ export interface ExamResult {
   result: string;
   examTime: string;
 }
+
+export interface Subject {
+  id: number;
+  title: string;
+  code: string;
+  description: string;
+  credit: number;
+  chapterQuantity?: number;
+  questionQuantity?: number;
+}
+
 // constants
 
 export const AUTH_USER = {
