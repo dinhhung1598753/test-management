@@ -16,16 +16,13 @@ export interface MenuItem {
 
 export interface Question {
   id: number;
-  order: number;
-  subjectName: string;
-  question: string;
-  imageQuestion?: string;
-  chapter: string;
+  topicText?: string;
+  topicImage?: string;
+  createdDate?: string;
   level: string;
   answers: {
-    id: number;
-    label: string;
-    isCorrect?: boolean;
+    content: string;
+    corrected?: boolean;
   }[];
 }
 

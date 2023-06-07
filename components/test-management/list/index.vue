@@ -31,13 +31,11 @@ const isTeacher = computed(() => authUser.value === AUTH_USER.teacher);
 
 <template>
   <div class="list-questions">
-    <v-table>
+    <v-table fixed-header height="500px">
       <thead>
         <tr>
           <th v-if="isTeacher"></th>
           <th class="text-left">STT</th>
-          <th class="text-left">Môn học</th>
-          <th class="text-left">Bộ đề</th>
           <th class="text-left">Câu hỏi</th>
           <th class="text-left">Độ khó</th>
           <th v-if="isTeacher" class="text-left">Hành động</th>
@@ -47,9 +45,7 @@ const isTeacher = computed(() => authUser.value === AUTH_USER.teacher);
         <tr v-for="question in questions" :key="question.id">
           <td v-if="isTeacher"><v-checkbox-btn /></td>
           <td>{{ question.id }}</td>
-          <td>{{ question.subjectName }}</td>
-          <td>{{ question.chapter }}</td>
-          <td>{{ question.question }}</td>
+          <td>{{ question.topicText }}</td>
           <td>{{ question.level }}</td>
           <td class="action" v-if="isTeacher">
             <v-icon size="small" class="me-2" @click="createQuestion">
