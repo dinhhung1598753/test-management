@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Subject } from "@/types";
-import { getSubjects, create, updateById, deleteById } from "@/models/subject";
+import { useSubjectStore } from "@/stores/subject";
+const subjectStore = useSubjectStore();
 
 const title = ref("");
 const code = ref("");
@@ -17,23 +18,26 @@ const showCreateSubjectForm = () => {
 };
 
 const closeForm = () => {
+  title.value = "";
+  code.value = "";
+  description.value = "";
+  credit.value = 0;
   isShowCreateSubjectForm.value = false;
   isDisabledCreateButton.value = false;
 };
-
-const subjects = ref<Subject[]>();
 // get
-const res = await getSubjects();
-subjects.value = res?.data || [];
+const res = await subjectStore.getSubjects();
+const subjects = computed(() => subjectStore.subjects);
 
 // create
 const createSubject = async () => {
-  const res = await create(
+  const res = await subjectStore.create(
     title.value,
     code.value,
     description.value,
     credit.value
   );
+  await subjectStore.getSubjects();
   isShowSnack.value = true;
   titleSnack.value = "Thêm thành công";
   closeForm();
@@ -47,7 +51,13 @@ const editSubject = async (
   description: string,
   credit: number
 ) => {
-  const res = await updateById(id, title, code, description, credit);
+  const res = await subjectStore.updateById(
+    id,
+    title,
+    code,
+    description,
+    credit
+  );
 
   isShowSnack.value = true;
   titleSnack.value = "Sửa thành công";
@@ -56,8 +66,7 @@ const editSubject = async (
 // delete
 
 const deleteSubject = async (id: number) => {
-  const res = await deleteById(id);
-
+  const res = await subjectStore.deleteById(id);
   isShowSnack.value = true;
   titleSnack.value = "Xoá thành công";
 };
@@ -93,7 +102,7 @@ const deleteSubject = async (id: number) => {
   </div>
 
   <div class="search"></div>
-  <v-table class="subject-table">
+  <v-table class="subject-table" fixed-header height="500px">
     <thead>
       <tr class="row-head">
         <th class="cell text-center">STT</th>
