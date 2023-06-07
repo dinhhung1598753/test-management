@@ -17,7 +17,6 @@ const subjects = computed(() => subjectStore.subjects);
 // get questions
 const fetchQuestionsBySubject = async (code: string) => {
   const res = await questionStore.getQuestions(code);
-  console.log("questions", questions);
 };
 </script>
 <template>

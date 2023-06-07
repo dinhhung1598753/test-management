@@ -1,77 +1,21 @@
 <script lang="ts" setup>
 import { Question } from "@/types";
-const questions: Question[] = [
-  {
-    id: 1,
-    topicText: "Why does the man want to buy Ms. Jefferson some flowers?",
-    level: "Dễ",
-    answers: [
-      {
-        content: "A. She was promoted.",
-        corrected: true,
-      },
-      {
-        content: "B. She won an award.",
-        corrected: false,
-      },
-      {
-        content: "C. She is moving.",
-        corrected: false,
-      },
-      {
-        content: "D. She is retiring.",
-        corrected: false,
-      },
-    ],
-  },
-  {
-    id: 2,
-    topicText: "Why does the man want to buy Ms. Jefferson some flowers?",
-    level: "Trung bình",
-    answers: [
-      {
-        content: "A. She was promoted.",
-        corrected: true,
-      },
-      {
-        content: "B. She won an award.",
-        corrected: false,
-      },
-      {
-        content: "C. She is moving.",
-        corrected: false,
-      },
-      {
-        content: "D. She is retiring.",
-        corrected: false,
-      },
-    ],
-  },
-  {
-    id: 3,
-    topicText: "Why does the man want to buy Ms. Jefferson some flowers?",
-    level: "Khó",
-    answers: [
-      {
-        content: "A. She was promoted.",
-        corrected: true,
-      },
-      {
-        content: "B. She won an award.",
-        corrected: false,
-      },
-      {
-        content: "C. She is moving.",
-        corrected: false,
-      },
-      {
-        content: "D. She is retiring.",
-        corrected: false,
-      },
-    ],
-  },
-];
-const subjects = ["Giải tích", "Lập trình C++", "Đại số", "CTDL & GT"];
+import { useQuestionStore } from "@/stores/question";
+import { useSubjectStore } from "@/stores/subject";
+
+const questionStore = useQuestionStore();
+const subjectStore = useSubjectStore();
+const questions = computed(() => questionStore.questions);
+
+//get subjects
+const res = await subjectStore.getSubjects();
+const subjects = computed(() => subjectStore.subjects);
+
+// get questions
+const fetchQuestionsBySubject = async (code: string) => {
+  const res = await questionStore.getQuestions(code);
+};
+
 const chapters = ["Chương 1", "Chương 2", "Chương 3"];
 const levels = ["Dễ", "Trung bình", "Khó"];
 
@@ -100,6 +44,17 @@ const deleteQuestion = () => {
       ></v-file-input>
     </div>
 
+    <div class="search-question-list">
+      <v-autocomplete
+        clearable
+        label="Nhập tên môn"
+        :items="subjects"
+        item-title="title"
+        item-value="code"
+        v-model="subjectCode"
+      ></v-autocomplete>
+      <v-btn @click="fetchQuestionsBySubject(subjectCode)">Tìm kiếm</v-btn>
+    </div>
     <test-management-list
       :questions="questions"
       :auth-user="authUser"
@@ -250,6 +205,13 @@ const deleteQuestion = () => {
   }
 }
 
+.search-question-list {
+  display: flex;
+  gap: 32px;
+  margin: 32px 0;
+  justify-content: start;
+  align-items: center;
+}
 .list-questions {
   margin-top: 16px;
   cursor: pointer;
