@@ -18,8 +18,12 @@ const fetchQuestionsBySubject = async (code: string) => {
   const res = await questionStore.getQuestions(code);
 };
 </script>
+
 <template>
   <h2 class="title">Ngân hàng câu hỏi</h2>
+
+  <question-management-teacher-create :subjects="subjects" />
+
   <div class="search-question-list">
     <v-autocomplete
       clearable
@@ -31,8 +35,33 @@ const fetchQuestionsBySubject = async (code: string) => {
     ></v-autocomplete>
     <v-btn @click="fetchQuestionsBySubject(subjectCode)">Tìm kiếm</v-btn>
   </div>
-
-  <question-management-admin-list :questions="questions" />
+  <div class="list-questions">
+    <v-table fixed-header height="500px">
+      <thead>
+        <tr>
+          <th class="text-left"></th>
+          <th class="text-left">STT</th>
+          <th class="text-left">Câu hỏi</th>
+          <th class="text-left">Độ khó</th>
+          <th class="text-left">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="question in questions" :key="question.id">
+          <td><v-checkbox-btn /></td>
+          <td>{{ question.id }}</td>
+          <td>{{ question.topicText }}</td>
+          <td>{{ question.level }}</td>
+          <td class="action">
+            <v-icon size="small" class="me-2" @click="createQuestion">
+              mdi-pencil
+            </v-icon>
+            <v-icon size="small" @click="deleteQuestion"> mdi-delete </v-icon>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
+  </div>
 </template>
 
 <style scoped lang="scss">
