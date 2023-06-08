@@ -1,53 +1,60 @@
 <script lang="ts" setup>
 import { UserInfo } from "@/types";
+import { getStudents } from "@/models/student";
 
-const students: UserInfo[] = [
-  {
-    id: 1,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 2,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 3,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 4,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 5,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-];
+const students = ref<UserInfo[]>();
+
+const res = await getStudents();
+console.log(123, res);
+students.value = res?.data || [];
+
+// const students: UserInfo[] = [
+//   {
+//     id: 1,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 2,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 3,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 4,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 5,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+// ];
 
 const isCreateStudent = ref(false);
 const isDeleteStudent = ref(false);
@@ -81,6 +88,7 @@ const deleteStudent = () => {
         <thead>
           <tr>
             <th class="text-left">Họ và tên</th>
+            <th class="text-left">MSSV</th>
             <th class="text-left">Năm sinh</th>
             <th class="text-left">Giới tính</th>
             <th class="text-left">Ngày đăng kí</th>
@@ -92,6 +100,7 @@ const deleteStudent = () => {
         <tbody>
           <tr v-for="student in students" :key="student.id">
             <td>{{ student.fullName }}</td>
+            <td>{{ student.code }}</td>
             <td>{{ student.birthday }}</td>
             <td>{{ student.gender }}</td>
             <td>{{ student.joinDate }}</td>
