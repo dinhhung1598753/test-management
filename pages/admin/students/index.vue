@@ -1,53 +1,60 @@
 <script lang="ts" setup>
 import { UserInfo } from "@/types";
+import { getStudents } from "@/models/student";
 
-const students: UserInfo[] = [
-  {
-    id: 1,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 2,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 3,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 4,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-  {
-    id: 5,
-    fullName: "Nguyễn Thị Hồng Hạnh",
-    birthday: "22/10/2000",
-    gender: "Nữ",
-    joinDate: "02/05/2023",
-    phoneNumber: "0975256563",
-    email: "nguyenhonghanh@gmail.com",
-  },
-];
+const students = ref<UserInfo[]>();
+
+const res = await getStudents();
+console.log(123, res);
+students.value = res?.data || [];
+
+// const students: UserInfo[] = [
+//   {
+//     id: 1,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 2,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 3,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 4,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+//   {
+//     id: 5,
+//     fullName: "Nguyễn Thị Hồng Hạnh",
+//     birthday: "22/10/2000",
+//     gender: "Nữ",
+//     joinDate: "02/05/2023",
+//     phoneNumber: "0975256563",
+//     email: "nguyenhonghanh@gmail.com",
+//   },
+// ];
 
 const isCreateStudent = ref(false);
 const isDeleteStudent = ref(false);

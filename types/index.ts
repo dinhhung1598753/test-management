@@ -6,6 +6,7 @@ export interface UserInfo {
   joinDate?: string;
   phoneNumber: string;
   email: string;
+  code: string;
 }
 
 export interface MenuItem {
