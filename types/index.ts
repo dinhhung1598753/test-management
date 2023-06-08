@@ -44,6 +44,11 @@ export interface Subject {
   questionQuantity?: number;
 }
 
+export interface Chapter {
+  id: number;
+  title: string;
+  order: number;
+}
 // constants
 
 export const AUTH_USER = {
