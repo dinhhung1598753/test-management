@@ -3,12 +3,15 @@ import { Question } from "@/types";
 import { useQuestionStore } from "@/stores/question";
 import { useSubjectStore } from "@/stores/subject";
 
+const isEditQuestion = ref(false);
+
 const questionStore = useQuestionStore();
 const subjectStore = useSubjectStore();
 
 const subjectCode = ref("");
 const questions = computed(() => questionStore.questions);
 
+const questionById = ref({});
 //get subjects
 const res = await subjectStore.getSubjects();
 const subjects = computed(() => subjectStore.subjects);
@@ -16,6 +19,25 @@ const subjects = computed(() => subjectStore.subjects);
 // get questions
 const fetchQuestionsBySubject = async (code: string) => {
   const res = await questionStore.getQuestions(code);
+};
+
+const openDialogEditQuestion = (question: object) => {
+  questionById.value = question;
+  isEditQuestion.value = true;
+};
+
+const closeDialog = () => {
+  isEditQuestion.value = false;
+};
+
+const editQuestion = (value: any) => {
+  console.log("kkkk", value.id, value.topicText);
+  // TODO CALL API
+};
+
+const deleteQuestion = (id: number) => {
+  // TODO CALL API
+  console.log("delete", id);
 };
 </script>
 
@@ -53,15 +75,28 @@ const fetchQuestionsBySubject = async (code: string) => {
           <td>{{ question.topicText }}</td>
           <td>{{ question.level }}</td>
           <td class="action">
-            <v-icon size="small" class="me-2" @click="createQuestion">
+            <v-icon
+              size="small"
+              class="me-2"
+              @click="openDialogEditQuestion(question)"
+            >
               mdi-pencil
             </v-icon>
-            <v-icon size="small" @click="deleteQuestion"> mdi-delete </v-icon>
+            <v-icon size="small" @click="deleteQuestion(question.id)">
+              mdi-delete
+            </v-icon>
           </td>
         </tr>
       </tbody>
     </v-table>
   </div>
+
+  <question-management-teacher-edit
+    :isEditQuestion="isEditQuestion"
+    :questionById="questionById"
+    @close="closeDialog"
+    @edit="editQuestion"
+  />
 </template>
 
 <style scoped lang="scss">

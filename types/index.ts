@@ -57,3 +57,9 @@ export const AUTH_USER = {
   student: "student",
   teacher: "teacher",
 };
+
+export const LEVEL = [
+  { key: "EASY", label: "EASY" },
+  { key: "MEDIUM", label: "MEDIUM" },
+  { key: "DIFFICULT", label: "DIFFICULT" },
+];

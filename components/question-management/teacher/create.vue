@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Subject } from "@/types";
+import { Subject, LEVEL } from "@/types";
 import { useQuestionStore } from "@/stores/question";
 
 const questionStore = useQuestionStore();
@@ -12,12 +12,16 @@ const props = defineProps({
 });
 const { subjects } = toRefs(props);
 
-const chapters = ["Chương 1", "Chương 2", "Chương 3"];
-const levels = ["Dễ", "Trung bình", "Khó"];
+const chapters = ["Chương 1", "Chương 2", "Chương 3"]; // TODO
+
+const levels = computed(() => {
+  return LEVEL;
+});
 const topicText = ref("");
 const chapterId = ref(1);
-const level = ref("easy");
+const level = ref("");
 const topicImageFile = ref("");
+const answers = ref([{ content: "", isCorrected: false }]);
 const isCreateQuestion = ref(false);
 
 // TODO
@@ -79,7 +83,10 @@ const createQuestion = () => {
                     <v-select
                       label="Độ khó"
                       :items="levels"
+                      item-title="label"
+                      item-value="key"
                       class="select"
+                      v-model="level"
                       :variant="'outlined'"
                     ></v-select>
                   </v-col>
