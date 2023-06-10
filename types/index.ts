@@ -3,12 +3,15 @@ export interface UserInfo {
   fullName: string;
   birthday: string;
   gender: string;
-  joinDate?: string;
   phoneNumber: string;
   email: string;
   code: string;
 }
 
+export interface Teacher extends UserInfo {}
+export interface Student extends UserInfo {
+  joinDate: string;
+}
 export interface MenuItem {
   title: string;
   icon: string;

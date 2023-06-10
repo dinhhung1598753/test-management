@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { UserInfo } from "@/types";
-import { getStudents } from "@/models/student";
+import { getStudents } from "~/stores/student";
 
 const students = ref<UserInfo[]>();
 
