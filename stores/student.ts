@@ -3,6 +3,7 @@ import { api } from "@/apis";
 
 export const useStudentStore = defineStore("student", () => {
   const students = ref<Student[]>([]);
+  const isCreating = ref(false);
 
   const getStudents = async () => {
     const res = await api.get("/student/list").catch((err) => {
@@ -12,7 +13,7 @@ export const useStudentStore = defineStore("student", () => {
     students.value = res?.data || [];
   };
 
-  const create = async (
+  const createStudent = async (
     fullname: string,
     code: string,
     birthday: string,
@@ -71,8 +72,9 @@ export const useStudentStore = defineStore("student", () => {
   };
   return {
     students,
+    isCreating,
     getStudents,
-    create,
+    createStudent,
     updateById,
     deleteById,
   };
