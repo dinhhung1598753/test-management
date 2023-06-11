@@ -35,9 +35,8 @@ const editQuestion = (value: any) => {
   // TODO CALL API
 };
 
-const deleteQuestion = (id: number) => {
-  // TODO CALL API
-  console.log("delete", id);
+const deleteQuestion = async (id: number) => {
+  const res = await questionStore.deleteById(id);
 };
 </script>
 
@@ -62,7 +61,7 @@ const deleteQuestion = (id: number) => {
       <thead>
         <tr>
           <th class="text-left"></th>
-          <th class="text-left">STT</th>
+          <th class="text-left">ID</th>
           <th class="text-left">Câu hỏi</th>
           <th class="text-left">Độ khó</th>
           <th class="text-left">Hành động</th>

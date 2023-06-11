@@ -50,6 +50,17 @@ export interface Chapter {
   title: string;
   order: number;
 }
+
+export interface Test {
+  id: number;
+  createdAt: string;
+  updatedAt?: string;
+  totalPoint: number;
+  testDay: string;
+  subjectCode: string;
+  subjectTitle: string;
+  duration: number;
+}
 // constants
 
 export const AUTH_USER = {
