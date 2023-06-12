@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const name = ref("");
 const props = defineProps({
   isEditStudent: {
     type: Boolean,
@@ -18,11 +19,11 @@ const closeDialog = () => {
   emit("close");
 };
 
-const editStudent = () => {
+const editStudent = (id: number) => {
   // TODO CALL API
+  console.log("name.value", name.value);
   emit("edit", {
-    id: 1,
-    fullname: "thu",
+    id,
   });
 };
 </script>
@@ -94,7 +95,11 @@ const editStudent = () => {
             <v-btn color="blue-darken-1" variant="text" @click="closeDialog">
               Huỷ
             </v-btn>
-            <v-btn color="blue-darken-1" variant="text" @click="editStudent">
+            <v-btn
+              color="blue-darken-1"
+              variant="text"
+              @click="editStudent(studentById.id)"
+            >
               Lưu
             </v-btn>
           </v-card-actions>

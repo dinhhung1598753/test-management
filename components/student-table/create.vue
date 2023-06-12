@@ -16,13 +16,13 @@ const isCreateStudent = ref(false);
 // TODO
 const submit = async () => {
   const res = await studentStore.createStudent(
-    (fullName.value = ""),
-    (code.value = ""),
-    (birthday.value = ""),
-    (gender.value = ""),
-    (joinDate.value = ""),
-    (phoneNumber.value = ""),
-    (email.value = "")
+    fullName.value,
+    code.value,
+    birthday.value,
+    gender.value,
+    joinDate.value,
+    phoneNumber.value,
+    email.value
   );
   // await studentStore.getStudents();
   isCreateStudent.value = false;
