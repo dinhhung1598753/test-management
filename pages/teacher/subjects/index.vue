@@ -74,20 +74,21 @@ const deleteSubject = async (id: number) => {
 
 // chapters
 const isShowCreateChapterForm = ref(false);
+const isDisabledCreateChapterButton = ref(false);
 const order = ref<number>(0);
 const titleChapter = ref("");
 const subjectCode = ref("");
 
 const showCreateChapterForm = () => {
   isShowCreateChapterForm.value = true;
-  isDisabledCreateButton.value = true;
+  isDisabledCreateChapterButton.value = true;
 };
 
 const closeChapterForm = () => {
   order.value = 0;
   titleChapter.value = "";
   isShowCreateChapterForm.value = false;
-  isDisabledCreateButton.value = false;
+  isDisabledCreateChapterButton.value = false;
 };
 
 const fetchChaptersBySubject = async (code: string) => {
@@ -99,10 +100,11 @@ const createChapter = async () => {
   const res = await subjectStore.createChapter(
     titleChapter.value,
     subjectCode.value,
-    order.value
+    +order.value
   );
   isShowSnack.value = true;
   titleSnack.value = "Thêm chương thành công";
+  await subjectStore.getChapters(subjectCode.value);
   closeChapterForm();
 };
 
@@ -236,7 +238,7 @@ const deleteChapter = async (id: number) => {
           <div class="create-chapter">
             <v-btn
               @click="showCreateChapterForm"
-              :disabled="isDisabledCreateButton"
+              :disabled="isDisabledCreateChapterButton"
               >Thêm chương</v-btn
             >
 
