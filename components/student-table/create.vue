@@ -8,8 +8,8 @@ const fullName = ref("");
 const code = ref("");
 const birthday = ref("");
 const gender = ref("");
-const joinDate = ref("");
 const phoneNumber = ref("");
+const course = ref(0);
 const email = ref("");
 const isCreateStudent = ref(false);
 
@@ -20,8 +20,8 @@ const submit = async () => {
     code.value,
     birthday.value,
     gender.value,
-    joinDate.value,
     phoneNumber.value,
+    course.value,
     email.value
   );
   // await studentStore.getStudents();
@@ -84,15 +84,15 @@ const createStudent = () => {
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
-                      v-model="joinDate"
-                      label="Nhập ngày tham gia"
+                      v-model="phoneNumber"
+                      label="Nhập số điện thoại"
                       required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
-                      v-model="phoneNumber"
-                      label="Nhập số điện thoại"
+                      v-model="course"
+                      label="Nhập khoá"
                       required
                     ></v-text-field>
                   </v-col>

@@ -10,6 +10,9 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+
+const { studentById } = toRefs(props);
+
 const emit = defineEmits<{
   (e: "edit", data: any): void;
   (e: "close"): void;
@@ -19,11 +22,11 @@ const closeDialog = () => {
   emit("close");
 };
 
-const editStudent = (id: number) => {
-  // TODO CALL API
-  console.log("name.value", name.value);
+const student = computed(() => props.studentById);
+
+const editStudent = () => {
   emit("edit", {
-    id,
+    student,
   });
 };
 </script>
@@ -41,49 +44,49 @@ const editStudent = (id: number) => {
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.fullName"
+                    v-model="student.fullName"
                     :placeholder="'Nhập họ và tên'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.code"
+                    v-model="student.code"
                     :placeholder="'Nhập MSSV'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.birthday"
+                    v-model="student.birthday"
                     :placeholder="'Nhập ngày sinh'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.gender"
+                    v-model="student.gender"
                     :placeholder="'Nhập giới tính'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.joinDate"
-                    :placeholder="'Nhập ngày tham gia'"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    required
-                    :model-value="studentById.phoneNumber"
+                    v-model="student.phoneNumber"
                     :placeholder="'Nhập số điện thoại'"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
                     required
-                    :model-value="studentById.email"
+                    v-model="student.course"
+                    :placeholder="'Nhập khoá'"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    required
+                    v-model="student.email"
                     :placeholder="'Nhập email'"
                   ></v-text-field>
                 </v-col>
@@ -95,11 +98,7 @@ const editStudent = (id: number) => {
             <v-btn color="blue-darken-1" variant="text" @click="closeDialog">
               Huỷ
             </v-btn>
-            <v-btn
-              color="blue-darken-1"
-              variant="text"
-              @click="editStudent(studentById.id)"
-            >
+            <v-btn color="blue-darken-1" variant="text" @click="editStudent">
               Lưu
             </v-btn>
           </v-card-actions>

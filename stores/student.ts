@@ -14,22 +14,22 @@ export const useStudentStore = defineStore("student", () => {
   };
 
   const createStudent = async (
-    fullname: string,
+    fullName: string,
     code: string,
     birthday: string,
     gender: string,
-    joinDate: string,
     phoneNumber: string,
+    course: number,
     email: string
   ) => {
     const res = await api
       .post("/student/add", {
-        fullname,
+        fullName,
         code,
         birthday,
         gender,
-        joinDate,
         phoneNumber,
+        course,
         email,
       })
       .catch((err) => {});
@@ -37,22 +37,22 @@ export const useStudentStore = defineStore("student", () => {
 
   const updateById = async (
     id: number,
-    fullname: string,
+    fullName: string,
     code: string,
     birthday: string,
     gender: string,
-    joinDate: string,
     phoneNumber: string,
+    course: number,
     email: string
   ) => {
     const res = await api
       .put(`/student/update/${id}`, {
-        fullname,
+        fullName,
         code,
         birthday,
         gender,
-        joinDate,
         phoneNumber,
+        course,
         email,
       })
       .catch((err) => {});

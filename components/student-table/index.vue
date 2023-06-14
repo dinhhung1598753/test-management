@@ -19,9 +19,28 @@ const closeDialog = () => {
   isEditStudent.value = false;
 };
 
-const editStudent = (value: any) => {
-  console.log("kkkk", value.id, value.fullName);
-  // TODO CALL API
+const editStudent = async (e: any) => {
+  console.log("value", e.student.value);
+  const id = e.student.value.id;
+  const fullName = e.student.value.fullName;
+  const code = e.student.value.code;
+  const birthday = e.student.value.birthday;
+  const gender = e.student.value.gender;
+  const phoneNumber = e.student.value.phoneNumber;
+  const course = e.student.value.course;
+  const email = e.student.value.email;
+  const res = await studentStore.updateById(
+    id,
+    fullName,
+    code,
+    birthday,
+    gender,
+    phoneNumber,
+    course,
+    email
+  );
+
+  isEditStudent.value = false;
 };
 
 const deleteStudent = (id: number) => {
@@ -41,8 +60,8 @@ const deleteStudent = (id: number) => {
           <th class="text-left">MSSV</th>
           <th class="text-left">Năm sinh</th>
           <th class="text-left">Giới tính</th>
-          <th class="text-left">Ngày đăng kí</th>
           <th class="text-left">Điện thoại</th>
+          <th class="text-left">Khoá</th>
           <th class="text-left">Email</th>
           <th class="text-left">Hành động</th>
         </tr>
@@ -53,8 +72,8 @@ const deleteStudent = (id: number) => {
           <td>{{ student.code }}</td>
           <td>{{ student.birthday }}</td>
           <td>{{ student.gender }}</td>
-          <td>{{ student.joinDate }}</td>
           <td>{{ student.phoneNumber }}</td>
+          <td>{{ student.course }}</td>
           <td>{{ student.email }}</td>
           <td class="action">
             <v-icon
