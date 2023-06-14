@@ -6,6 +6,8 @@ const studentStore = useStudentStore();
 
 const fullName = ref("");
 const code = ref("");
+const username = ref("");
+const password = ref("");
 const birthday = ref("");
 const gender = ref("");
 const phoneNumber = ref("");
@@ -18,6 +20,8 @@ const submit = async () => {
   const res = await studentStore.createStudent(
     fullName.value,
     code.value,
+    username.value,
+    password.value,
     birthday.value,
     gender.value,
     phoneNumber.value,
@@ -65,6 +69,20 @@ const createStudent = () => {
                     <v-text-field
                       v-model="code"
                       label="Nhập MSSV"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="username"
+                      label="Nhập tên đăng nhập"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="password"
+                      label="Nhập mật khẩu"
                       required
                     ></v-text-field>
                   </v-col>

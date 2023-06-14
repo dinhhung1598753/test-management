@@ -16,6 +16,8 @@ export const useStudentStore = defineStore("student", () => {
   const createStudent = async (
     fullName: string,
     code: string,
+    username: string,
+    password: string,
     birthday: string,
     gender: string,
     phoneNumber: string,
@@ -26,6 +28,8 @@ export const useStudentStore = defineStore("student", () => {
       .post("/student/add", {
         fullName,
         code,
+        username,
+        password,
         birthday,
         gender,
         phoneNumber,
