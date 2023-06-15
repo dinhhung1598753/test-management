@@ -57,6 +57,10 @@ const cancelCreateForm = () => {
   duration.value = 0;
   isOpenCreateForm.value = false;
 };
+
+const getTestDetailRoutePath = async (testId: number) => {
+  await testsStore.getTestDetail(testId);
+};
 </script>
 
 <template>
@@ -115,18 +119,22 @@ const cancelCreateForm = () => {
   <v-table fixed-header height="450px" class="test-table">
     <thead>
       <tr>
-        <th class="text-left">ID</th>
-        <th class="text-left">Môn học</th>
-        <th class="text-left">Ngày tạo</th>
-        <th class="text-left">Ngày mở đề</th>
-        <th class="text-left">Tổng điểm</th>
-        <th class="text-left">Thời gian làm bài (phút)</th>
-        <th class="text-left">Hành động</th>
+        <th class="text-center">ID</th>
+        <th class="text-center">Môn học</th>
+        <th class="text-center">Ngày tạo</th>
+        <th class="text-center">Ngày mở đề</th>
+        <th class="text-center">Tổng điểm</th>
+        <th class="text-center">Thời gian làm bài (phút)</th>
+        <th class="text-center">Hành động</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="test in tests" :key="test.id">
-        <td>{{ test.id }}</td>
+        <td @click="getTestDetailRoutePath(test.id)">
+          <nuxt-link to="/teacher/tests/detail" class="link">{{
+            test.id
+          }}</nuxt-link>
+        </td>
         <td>{{ test.subjectTitle }}</td>
         <td>{{ test.createdAt }}</td>
         <td>{{ test.testDay }}</td>
@@ -157,6 +165,7 @@ const cancelCreateForm = () => {
 
 .test-table {
   cursor: pointer;
+  text-align: center;
 }
 
 .form-create {
@@ -174,5 +183,9 @@ const cancelCreateForm = () => {
     gap: 24px;
     color: #fff;
   }
+}
+
+.link {
+  text-decoration: none;
 }
 </style>

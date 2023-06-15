@@ -29,7 +29,7 @@ export interface Question {
   level: string;
   answers: {
     content: string;
-    corrected?: boolean;
+    isCorrected?: boolean;
   }[];
 }
 
@@ -79,4 +79,11 @@ export const LEVEL = [
   { key: "EASY", label: "EASY" },
   { key: "MEDIUM", label: "MEDIUM" },
   { key: "DIFFICULT", label: "DIFFICULT" },
+];
+
+export const ANSWERS = [
+  { key: 1, name: "A" },
+  { key: 2, name: "B" },
+  { key: 3, name: "C" },
+  { key: 4, name: "D" },
 ];
