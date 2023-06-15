@@ -1,19 +1,19 @@
-import { Student } from "@/types";
+import { Teacher } from "@/types";
 import { api } from "@/apis";
 
-export const useStudentStore = defineStore("student", () => {
-  const students = ref<Student[]>([]);
+export const useTeacherStore = defineStore("teacher", () => {
+  const teachers = ref<Teacher[]>([]);
   const isCreating = ref(false);
 
-  const getStudents = async () => {
-    const res = await api.get("/student/list").catch((err) => {
+  const getTeachers = async () => {
+    const res = await api.get("/teacher/list").catch((err) => {
       console.log(err);
       return null;
     });
-    students.value = res?.data || [];
+    teachers.value = res?.data || [];
   };
 
-  const createStudent = async (
+  const createTeacher = async (
     fullName: string,
     code: string,
     username: string,
@@ -21,11 +21,10 @@ export const useStudentStore = defineStore("student", () => {
     birthday: string,
     gender: string,
     phoneNumber: string,
-    course: number,
     email: string
   ) => {
     const res = await api
-      .post("/student/add", {
+      .post("/teacher/add", {
         fullName,
         code,
         username,
@@ -33,7 +32,6 @@ export const useStudentStore = defineStore("student", () => {
         birthday,
         gender,
         phoneNumber,
-        course,
         email,
       })
       .catch((err) => {});
@@ -46,17 +44,15 @@ export const useStudentStore = defineStore("student", () => {
     birthday: string,
     gender: string,
     phoneNumber: string,
-    course: number,
     email: string
   ) => {
     const res = await api
-      .put(`/student/update/${id}`, {
+      .put(`/teacher/update/${id}`, {
         fullName,
         code,
         birthday,
         gender,
         phoneNumber,
-        course,
         email,
       })
       .catch((err) => {});
@@ -64,21 +60,21 @@ export const useStudentStore = defineStore("student", () => {
   };
 
   const deleteById = async (id: number) => {
-    const res = await api.delete(`student/disable/${id}`).catch(() => null);
+    const res = await api.delete(`teacher/disable/${id}`).catch(() => null);
     if (res !== null) {
-      const deletedItemIndex = students.value.findIndex(
+      const deletedItemIndex = teachers.value.findIndex(
         (item) => item.id === id
       );
       if (deletedItemIndex > -1) {
-        students.value.splice(deletedItemIndex, 1);
+        teachers.value.splice(deletedItemIndex, 1);
       }
     }
   };
   return {
-    students,
+    teachers,
     isCreating,
-    getStudents,
-    createStudent,
+    getTeachers,
+    createTeacher,
     updateById,
     deleteById,
   };

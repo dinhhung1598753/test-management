@@ -1,5 +1,7 @@
 export interface UserInfo {
   id: number;
+  username: string;
+  password: string;
   fullName: string;
   birthday: string;
   gender: string;
@@ -11,6 +13,7 @@ export interface UserInfo {
 export interface Teacher extends UserInfo {}
 export interface Student extends UserInfo {
   joinDate: string;
+  course: number;
 }
 export interface MenuItem {
   title: string;
