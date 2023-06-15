@@ -6,6 +6,8 @@ const isEditStudent = ref(false);
 const studentStore = useStudentStore();
 
 const studentById = ref({});
+const titleSnack = ref("");
+const isShowSnack = ref(false);
 //get students
 const res = await studentStore.getStudents();
 const students = computed(() => studentStore.students);
@@ -43,9 +45,12 @@ const editStudent = async (e: any) => {
   isEditStudent.value = false;
 };
 
-const deleteStudent = (id: number) => {
-  // TODO CALL API
-  console.log("delete", id);
+// delete
+
+const deleteStudent = async (id: number) => {
+  const res = await studentStore.deleteById(id);
+  isShowSnack.value = true;
+  titleSnack.value = "Xoá thành công";
 };
 </script>
 
@@ -98,6 +103,13 @@ const deleteStudent = (id: number) => {
     @close="closeDialog"
     @edit="editStudent"
   />
+  <template>
+    <div class="text-center ma-2">
+      <v-snackbar v-model="isShowSnack" :timeout="1200" :color="'#2196F3'">
+        {{ titleSnack }}
+      </v-snackbar>
+    </div>
+  </template>
 </template>
 
 <style scoped lang="scss">

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { Student } from "@/types";
-import { useStudentStore } from "@/stores/student";
+import { Teacher } from "@/types";
+import { useTeacherStore } from "@/stores/teacher";
 
-const studentStore = useStudentStore();
+const teacherStore = useTeacherStore();
 
 const fullName = ref("");
 const code = ref("");
@@ -11,13 +11,12 @@ const password = ref("");
 const birthday = ref("");
 const gender = ref("");
 const phoneNumber = ref("");
-const course = ref(0);
 const email = ref("");
-const isCreateStudent = ref(false);
+const isCreateTeacher = ref(false);
 
 // TODO
 const submit = async () => {
-  const res = await studentStore.createStudent(
+  const res = await teacherStore.createTeacher(
     fullName.value,
     code.value,
     username.value,
@@ -25,36 +24,35 @@ const submit = async () => {
     birthday.value,
     gender.value,
     phoneNumber.value,
-    course.value,
     email.value
   );
-  // await studentStore.getStudents();
-  isCreateStudent.value = false;
+  // await teacherStore.getTeachers();
+  isCreateTeacher.value = false;
 };
-const createStudent = () => {
-  isCreateStudent.value = true;
+const createTeacher = () => {
+  isCreateTeacher.value = true;
 };
 </script>
 
 <template>
-  <div class="student-management">
+  <div class="teacher-management">
     <div class="action">
-      <v-btn @click="createStudent"
+      <v-btn @click="createTeacher"
         ><v-icon icon="mdi-plus" />Thêm mới sinh viên</v-btn
       >
       <v-file-input
         clearable
-        label="Import danh sách sinh viên"
+        label="Import danh sách giáo viên"
         variant="underlined"
       ></v-file-input>
       <search />
     </div>
-    <div class="dialog-create-student">
+    <div class="dialog-create-teacher">
       <v-row justify="center">
-        <v-dialog v-model="isCreateStudent" persistent width="1024">
+        <v-dialog v-model="isCreateTeacher" persistent width="1024">
           <v-card>
             <v-card-title>
-              <span class="text-h5">Thêm mới sinh viên</span>
+              <span class="text-h5">Thêm mới giáo viên</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -69,7 +67,7 @@ const createStudent = () => {
                   <v-col cols="12">
                     <v-text-field
                       v-model="code"
-                      label="Nhập MSSV"
+                      label="Nhập mã GV"
                       required
                     ></v-text-field>
                   </v-col>
@@ -110,13 +108,6 @@ const createStudent = () => {
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
-                      v-model="course"
-                      label="Nhập khoá"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
                       v-model="email"
                       label="Nhập email"
                       required
@@ -130,7 +121,7 @@ const createStudent = () => {
               <v-btn
                 color="blue-darken-1"
                 variant="text"
-                @click="isCreateStudent = false"
+                @click="isCreateTeacher = false"
               >
                 Huỷ
               </v-btn>
@@ -145,7 +136,7 @@ const createStudent = () => {
   </div>
 </template>
 <style scoped lang="scss">
-.student-management {
+.teacher-management {
   > .action {
     width: 900px;
     display: flex;
