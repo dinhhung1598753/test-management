@@ -1,15 +1,117 @@
 <script lang="ts" setup>
 import { Test } from "@/types";
 import { useTestStore } from "@/stores/test";
+import { useSubjectStore } from "@/stores/subject";
+
+const subjectStore = useSubjectStore();
 const testsStore = useTestStore();
 
-// get
+const subjectCode = ref("");
+const chapterOrders = ref([]);
+const questionQuantity = ref(0);
+const testDay = ref("");
+const duration = ref(0);
+const isOpenCreateForm = ref(false);
+const titleSnack = ref("");
+const isShowSnack = ref(false);
+
+//get subjects, chapters
+const result = await subjectStore.getSubjects();
+const subjects = computed(() => subjectStore.subjects);
+
+const chapters = computed(() => {
+  return subjectStore.chapters;
+});
+watch(subjectCode, () => {
+  subjectStore.getChapters(subjectCode.value);
+});
+
+// get tests
 const res = await testsStore.getTests();
 const tests = computed(() => testsStore.tests);
+
+// create test
+const createNewTest = () => {
+  isOpenCreateForm.value = true;
+};
+
+const submitCreateForm = async () => {
+  const res = await testsStore.createTest(
+    subjectCode.value,
+    chapterOrders.value,
+    questionQuantity.value,
+    testDay.value,
+    duration.value
+  );
+  await testsStore.getTests();
+  isShowSnack.value = true;
+  titleSnack.value = "Thêm bài test thành công";
+  isOpenCreateForm.value = false;
+};
+
+const cancelCreateForm = () => {
+  subjectCode.value = "";
+  chapterOrders.value = [];
+  questionQuantity.value = 0;
+  testDay.value = "";
+  duration.value = 0;
+  isOpenCreateForm.value = false;
+};
 </script>
 
 <template>
   <h2 class="title">Quản lý bài thi</h2>
+
+  <div class="create-tests">
+    <v-btn @click="createNewTest" :disabled="isOpenCreateForm"
+      ><v-icon icon="mdi-plus" />Thêm mới bài thi</v-btn
+    >
+
+    <div v-if="isOpenCreateForm" class="form-create">
+      <div class="form">
+        <v-autocomplete
+          clearable
+          label="Nhập tên môn"
+          :items="subjects"
+          item-title="title"
+          item-value="code"
+          v-model="subjectCode"
+        ></v-autocomplete>
+        <v-select
+          label="Chương"
+          :items="chapters"
+          item-title="order"
+          item-value="id"
+          class="select"
+          multiple
+          v-model="chapterOrders"
+          :variant="'outlined'"
+        ></v-select>
+      </div>
+      <div class="form">
+        <v-text-field
+          required
+          :placeholder="'Nhập số lượng câu'"
+          v-model="questionQuantity"
+        ></v-text-field>
+        <v-text-field
+          required
+          :placeholder="'Nhập ngày kiểm tra'"
+          v-model="testDay"
+        ></v-text-field>
+        <v-text-field
+          required
+          :placeholder="'Nhập thời gian làm bài'"
+          v-model="duration"
+        ></v-text-field>
+      </div>
+
+      <div class="action">
+        <v-btn @click="cancelCreateForm" color="#fcfcfc">Huỷ</v-btn>
+        <v-btn @click="submitCreateForm">Thêm</v-btn>
+      </div>
+    </div>
+  </div>
   <v-table fixed-header height="450px" class="test-table">
     <thead>
       <tr>
@@ -37,6 +139,13 @@ const tests = computed(() => testsStore.tests);
       </tr>
     </tbody>
   </v-table>
+  <template>
+    <div class="text-center ma-2">
+      <v-snackbar v-model="isShowSnack" :timeout="1200" :color="'#2196F3'">
+        {{ titleSnack }}
+      </v-snackbar>
+    </div>
+  </template>
 </template>
 
 <style lang="scss" scoped>
@@ -48,5 +157,22 @@ const tests = computed(() => testsStore.tests);
 
 .test-table {
   cursor: pointer;
+}
+
+.form-create {
+  margin-bottom: 16px;
+
+  > .form {
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    display: flex;
+    margin: 16px 0;
+  }
+  > .action {
+    display: flex;
+    gap: 24px;
+    color: #fff;
+  }
 }
 </style>

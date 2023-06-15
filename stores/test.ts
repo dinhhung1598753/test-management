@@ -12,6 +12,24 @@ export const useTestStore = defineStore("test", () => {
     tests.value = res?.data || [];
   };
 
+  const createTest = async (
+    subjectCode: string,
+    chapterOrders: Array<[]>,
+    questionQuantity: number,
+    testDay: string,
+    duration: number
+  ) => {
+    const res = await api
+      .post("/test/create/first-step", {
+        subjectCode,
+        chapterOrders,
+        questionQuantity,
+        testDay,
+        duration,
+      })
+      .catch((err) => {});
+  };
+
   const deleteById = async (id: number) => {
     const res = await api.delete(`test/disable/${id}`).catch(() => null);
     if (res !== null) {
@@ -26,5 +44,6 @@ export const useTestStore = defineStore("test", () => {
     tests,
     getTests,
     deleteById,
+    createTest,
   };
 });
