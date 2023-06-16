@@ -7,13 +7,18 @@ const studentStore = useStudentStore();
 //get students
 const res = await studentStore.getStudents();
 const students = computed(() => studentStore.students);
+
+// export students
+const exportStudents = async () => {
+  await studentStore.exportStudents();
+};
 </script>
 
 <template>
   <h2 class="title">Thông tin sinh viên</h2>
   <div class="student-info">
     <div class="action">
-      <v-btn>Export Danh sách </v-btn>
+      <v-btn @click="exportStudents">Export Danh sách </v-btn>
       <search />
     </div>
 
