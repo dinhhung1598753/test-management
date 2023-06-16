@@ -74,6 +74,17 @@ export const useStudentStore = defineStore("student", () => {
       }
     }
   };
+
+  const importStudents = async (formData: any) => {
+    const res = await api
+      .post("/student/import", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .catch((err) => console.log(err));
+  };
+
   return {
     students,
     isCreating,
@@ -81,5 +92,6 @@ export const useStudentStore = defineStore("student", () => {
     createStudent,
     updateById,
     deleteById,
+    importStudents,
   };
 });

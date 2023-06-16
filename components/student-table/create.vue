@@ -14,6 +14,8 @@ const phoneNumber = ref("");
 const course = ref(0);
 const email = ref("");
 const isCreateStudent = ref(false);
+const titleSnack = ref("");
+const isShowSnack = ref(false);
 
 // TODO
 const submit = async () => {
@@ -28,11 +30,25 @@ const submit = async () => {
     course.value,
     email.value
   );
-  // await studentStore.getStudents();
+  await studentStore.getStudents();
   isCreateStudent.value = false;
 };
 const createStudent = () => {
   isCreateStudent.value = true;
+};
+
+// import
+const file = ref();
+const formData = new FormData();
+
+const uploadFile = async () => {
+  formData.append("file", file.value[0]);
+  const res = await studentStore.importStudents(formData);
+  // if (res) {
+  //   isShowSnack.value = true;
+  //   titleSnack.value = "import danh sách thành công";
+  // }
+  // console.log(file.value);
 };
 </script>
 
@@ -43,10 +59,13 @@ const createStudent = () => {
         ><v-icon icon="mdi-plus" />Thêm mới sinh viên</v-btn
       >
       <v-file-input
+        v-model="file"
         clearable
         label="Import danh sách sinh viên"
         variant="underlined"
       ></v-file-input>
+
+      <v-btn @click="uploadFile">Import</v-btn>
       <search />
     </div>
     <div class="dialog-create-student">
@@ -143,6 +162,13 @@ const createStudent = () => {
       </v-row>
     </div>
   </div>
+  <template>
+    <div class="text-center ma-2">
+      <v-snackbar v-model="isShowSnack" :timeout="1200" :color="'#2196F3'">
+        {{ titleSnack }}
+      </v-snackbar>
+    </div>
+  </template>
 </template>
 <style scoped lang="scss">
 .student-management {
