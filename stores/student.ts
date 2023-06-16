@@ -85,6 +85,26 @@ export const useStudentStore = defineStore("student", () => {
       .catch((err) => console.log(err));
   };
 
+  const exportStudents = async () => {
+    const res = await api
+      .get("/student/export", {
+        responseType: "blob",
+      })
+      .then((res) => {
+        let fileUrl = window.URL.createObjectURL(res.data);
+        let fileLink = document.createElement("a");
+
+        fileLink.href = fileUrl;
+        fileLink.setAttribute("download", "export-student-template.xls");
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  };
   return {
     students,
     isCreating,
@@ -93,5 +113,6 @@ export const useStudentStore = defineStore("student", () => {
     updateById,
     deleteById,
     importStudents,
+    exportStudents,
   };
 });
