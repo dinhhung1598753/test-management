@@ -28,6 +28,7 @@ export interface Question {
   createdDate?: string;
   level: string;
   answers: {
+    id: number;
     content: string;
     isCorrected?: string;
   }[];

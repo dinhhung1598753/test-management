@@ -102,7 +102,7 @@ const editQuestion = () => {
                   <div
                     class="wrap"
                     v-for="answer in question.answers"
-                    :key="answer.content"
+                    :key="answer.id"
                   >
                     <v-text-field
                       v-model="answer.content"

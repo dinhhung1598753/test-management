@@ -66,7 +66,7 @@ const detailQuestion = (question: any) => {
                 <v-col
                   cols="12"
                   v-for="answer in questionItem.answers"
-                  :key="answer.content"
+                  :key="answer.id"
                 >
                   <div class="wrap">
                     <v-text-field class="answer">{{
