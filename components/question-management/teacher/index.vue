@@ -21,6 +21,11 @@ const fetchQuestionsBySubject = async (code: string) => {
   const res = await questionStore.getQuestions(code);
 };
 
+// get chapters
+const fetchChapterBySubject = async (code: string) => {
+  const res = await subjectStore.getChapters(code);
+};
+
 const openDialogEditQuestion = (question: object) => {
   questionById.value = question;
   isEditQuestion.value = true;
@@ -30,9 +35,12 @@ const closeDialog = () => {
   isEditQuestion.value = false;
 };
 
-const editQuestion = (value: any) => {
-  console.log("kkkk", value.id, value.topicText);
-  // TODO CALL API
+const editQuestion = async (e: any) => {
+  console.log("value", e.student.value);
+  const id = e.question.value.id;
+  const topicText = e.question.value.topicText;
+  const level = e.question.value.level;
+  const res = await questionStore.updateById(id, topicText, level);
 };
 
 const deleteQuestion = async (id: number) => {
@@ -92,6 +100,7 @@ const deleteQuestion = async (id: number) => {
 
   <question-management-teacher-edit
     :isEditQuestion="isEditQuestion"
+    :subjects="subjects"
     :questionById="questionById"
     @close="closeDialog"
     @edit="editQuestion"

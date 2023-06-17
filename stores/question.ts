@@ -14,15 +14,18 @@ export const useQuestionStore = defineStore("question", () => {
   };
 
   const createQuestion = async (
-    chapterId: number,
+    subjectCode: string,
+    chapterNo: number,
     topicText: string,
-    topicImageFile: string,
+    questionImage: string,
     level: string
   ) => {
     const res = await api
-      .post(`/question/add?chapterId=${chapterId}`, {
+      .post("/question/add", {
+        subjectCode,
+        chapterNo,
         topicText,
-        topicImageFile,
+        questionImage,
         level,
       })
       .catch((err) => {});
@@ -44,8 +47,8 @@ export const useQuestionStore = defineStore("question", () => {
   const updateById = async (
     id: number,
     topicText: string,
-    topicImageFile: string,
-    level: string
+    topicImageFile?: string,
+    level?: string
   ) => {
     const res = await api
       .put(`/question/update/${id}`, {

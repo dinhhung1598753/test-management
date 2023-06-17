@@ -29,7 +29,7 @@ export interface Question {
   level: string;
   answers: {
     content: string;
-    isCorrected?: boolean;
+    isCorrected?: string;
   }[];
 }
 
@@ -87,3 +87,17 @@ export const ANSWERS = [
   { key: 3, name: "C" },
   { key: 4, name: "D" },
 ];
+
+// functions
+export const stringToBoolean = (stringValue: string) => {
+  switch (stringValue?.toLowerCase()?.trim()) {
+    case "true":
+      return true;
+
+    case "false":
+      return false;
+
+    default:
+      return JSON.parse(stringValue);
+  }
+};

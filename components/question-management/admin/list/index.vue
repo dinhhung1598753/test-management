@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Question } from "@/types";
+import { Question, stringToBoolean } from "@/types";
 
 const props = defineProps({
   questions: {
@@ -75,7 +75,7 @@ const detailQuestion = (question: any) => {
                     <v-checkbox
                       label="Đáp án đúng"
                       class="checkbox"
-                      v-model="answer.corrected"
+                      :model-value="stringToBoolean(answer.isCorrected)"
                     ></v-checkbox>
                   </div>
                 </v-col>
