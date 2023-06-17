@@ -27,9 +27,9 @@ const levels = computed(() => {
   return LEVEL;
 });
 const topicText = ref("");
-const chapterNo = ref(1);
+const chapterId = ref(1);
 const level = ref("");
-const questionImage = ref("");
+const topicImage = ref("");
 const answers = ref([
   { content: "", isCorrected: "" },
   { content: "", isCorrected: "" },
@@ -42,9 +42,9 @@ const isCreateQuestion = ref(false);
 const submit = async () => {
   const res = await questionStore.createQuestion({
     subjectCode: subjectCode.value,
-    chapterNo: chapterNo.value,
+    chapterId: chapterId.value,
     topicText: topicText.value,
-    questionImage: questionImage.value,
+    topicImage: topicImage.value,
     level: level.value,
     answers: answers.value.map((item) => ({
       ...item,
@@ -100,7 +100,7 @@ const createQuestion = () => {
                       item-title="order"
                       item-value="id"
                       class="select"
-                      v-model="chapterNo"
+                      v-model="chapterId"
                       :variant="'outlined'"
                     ></v-select>
                   </v-col>

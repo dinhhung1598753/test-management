@@ -79,7 +79,7 @@ export const AUTH_USER = {
 export const LEVEL = [
   { key: "EASY", label: "EASY" },
   { key: "MEDIUM", label: "MEDIUM" },
-  { key: "DIFFICULT", label: "DIFFICULT" },
+  { key: "HARD", label: "HARD" },
 ];
 
 export const ANSWERS = [

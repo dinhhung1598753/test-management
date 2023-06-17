@@ -39,9 +39,9 @@ const submitCreateForm = async () => {
   const res = await testsStore.createTest(
     subjectCode.value,
     chapterOrders.value,
-    questionQuantity.value,
+    +questionQuantity.value,
     testDay.value,
-    duration.value
+    +duration.value
   );
   await testsStore.getTests();
   isShowSnack.value = true;

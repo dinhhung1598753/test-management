@@ -29,10 +29,24 @@ export const useTestStore = defineStore("test", () => {
     duration: number
   ) => {
     const res = await api
-      .post("/test/create/first-step", {
+      .post("/test/create/random", {
         subjectCode,
         chapterOrders,
         questionQuantity,
+        testDay,
+        duration,
+      })
+      .catch((err) => {});
+  };
+
+  const createTestCheckbox = async (
+    questionIds: Array<[]>,
+    testDay: string,
+    duration: number
+  ) => {
+    const res = await api
+      .post("/test/create", {
+        questionIds,
         testDay,
         duration,
       })
@@ -56,5 +70,6 @@ export const useTestStore = defineStore("test", () => {
     getTestDetail,
     deleteById,
     createTest,
+    createTestCheckbox,
   };
 });
