@@ -13,22 +13,18 @@ export const useQuestionStore = defineStore("question", () => {
     questions.value = res?.data || [];
   };
 
-  const createQuestion = async (
-    subjectCode: string,
-    chapterNo: number,
-    topicText: string,
-    questionImage: string,
-    level: string
-  ) => {
-    const res = await api
-      .post("/question/add", {
-        subjectCode,
-        chapterNo,
-        topicText,
-        questionImage,
-        level,
-      })
-      .catch((err) => {});
+  const createQuestion = async (data: {
+    subjectCode: string;
+    chapterNo: number;
+    topicText: string;
+    questionImage: string;
+    level: string;
+    answers: {
+      content: string;
+      isCorrected: string;
+    }[];
+  }) => {
+    const res = await api.post("/question/add", data).catch((err) => {});
   };
 
   const createAnswers = async (

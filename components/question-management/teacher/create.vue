@@ -30,22 +30,27 @@ const topicText = ref("");
 const chapterNo = ref(1);
 const level = ref("");
 const questionImage = ref("");
-const content = ref("");
-const isCorrected = ref(false);
-const answer = ref([
-  { content: content.value, isCorrected: isCorrected.value },
+const answers = ref([
+  { content: "", isCorrected: "" },
+  { content: "", isCorrected: "" },
+  { content: "", isCorrected: "" },
+  { content: "", isCorrected: "" },
 ]);
+
 const isCreateQuestion = ref(false);
 
-// TODO
 const submit = async () => {
-  const res = await questionStore.createQuestion(
-    subjectCode.value,
-    chapterNo.value,
-    topicText.value,
-    questionImage.value,
-    level.value
-  );
+  const res = await questionStore.createQuestion({
+    subjectCode: subjectCode.value,
+    chapterNo: chapterNo.value,
+    topicText: topicText.value,
+    questionImage: questionImage.value,
+    level: level.value,
+    answers: answers.value.map((item) => ({
+      ...item,
+      isCorrected: item.isCorrected ? "true" : "false",
+    })),
+  });
   // await questionStore.getQuestions();
   isCreateQuestion.value = false;
 };
@@ -118,44 +123,22 @@ const createQuestion = () => {
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">Đáp án </v-col>
-                  <v-col cols="12">
+
+                  <v-col
+                    cols="12"
+                    v-for="(answer, index) in answers"
+                    :key="index"
+                  >
                     <div class="wrap">
                       <v-text-field
                         required
-                        v-model="content"
+                        v-model="answer.content"
                         :placeholder="'Nhập đáp án'"
                       ></v-text-field>
                       <v-checkbox
-                        v-model="isCorrected"
+                        v-model="answer.isCorrected"
                         label="Đáp án đúng"
                       ></v-checkbox>
-                    </div>
-                  </v-col>
-                  <v-col cols="12">
-                    <div class="wrap">
-                      <v-text-field
-                        required
-                        :placeholder="'Nhập đáp án'"
-                      ></v-text-field>
-                      <v-checkbox label="Đáp án đúng"></v-checkbox>
-                    </div>
-                  </v-col>
-                  <v-col cols="12">
-                    <div class="wrap">
-                      <v-text-field
-                        required
-                        :placeholder="'Nhập đáp án'"
-                      ></v-text-field>
-                      <v-checkbox label="Đáp án đúng"></v-checkbox>
-                    </div>
-                  </v-col>
-                  <v-col cols="12">
-                    <div class="wrap">
-                      <v-text-field
-                        required
-                        :placeholder="'Nhập đáp án'"
-                      ></v-text-field>
-                      <v-checkbox label="Đáp án đúng"></v-checkbox>
                     </div>
                   </v-col>
                 </v-row>
