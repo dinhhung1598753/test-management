@@ -23,7 +23,7 @@ const exportStudents = async () => {
     </div>
 
     <div class="list-students">
-      <v-table>
+      <v-table fixed-header height="500px">
         <thead>
           <tr>
             <th class="text-left">Họ và tên</th>

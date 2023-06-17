@@ -27,7 +27,7 @@ const submit = async () => {
     birthday.value,
     gender.value,
     phoneNumber.value,
-    course.value,
+    +course.value,
     email.value
   );
   await studentStore.getStudents();
