@@ -39,18 +39,12 @@ export const useTestStore = defineStore("test", () => {
       .catch((err) => {});
   };
 
-  const createTestCheckbox = async (
-    questionIds: Array<[]>,
-    testDay: string,
-    duration: number
-  ) => {
-    const res = await api
-      .post("/test/create", {
-        questionIds,
-        testDay,
-        duration,
-      })
-      .catch((err) => {});
+  const createTestCheckbox = async (data: {
+    questionIds: number[];
+    testDay: string;
+    duration: number;
+  }) => {
+    const res = await api.post("/test/create", data).catch((err) => {});
   };
 
   const deleteById = async (id: number) => {

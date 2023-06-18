@@ -1,16 +1,22 @@
-import { Question } from "@/types";
+import type { Question } from "@/types";
 import { api } from "@/apis";
+import { AxiosResponse } from "axios";
 
 export const useQuestionStore = defineStore("question", () => {
   const questions = ref<Question[]>([]);
   const isCreating = ref(false);
 
-  const getQuestions = async (code: string) => {
-    const res = await api.get(`/question/list?code=${code}`).catch((err) => {
-      console.log(err);
-      return null;
-    });
-    questions.value = res?.data || [];
+  const getQuestions = async (code: string): Promise<Question[]> => {
+    try {
+      const res: AxiosResponse<Question[]> = await api.get(
+        `/question/list?code=${code}`
+      );
+      questions.value = res.data || [];
+    } catch (error) {
+      console.log(error);
+    } finally {
+      return questions.value;
+    }
   };
 
   const createQuestion = async (data: {

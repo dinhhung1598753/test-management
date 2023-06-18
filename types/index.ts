@@ -68,6 +68,15 @@ export interface Test {
   subjectTitle: string;
   duration: number;
 }
+
+export interface ExamClass {
+  id: number;
+  roomName: string;
+  semester: string;
+  code: string;
+  createdDate: string;
+}
+
 // constants
 
 export const AUTH_USER = {

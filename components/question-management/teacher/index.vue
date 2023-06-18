@@ -19,8 +19,8 @@ const res = await subjectStore.getSubjects();
 const subjects = computed(() => subjectStore.subjects);
 
 // get questions
-const fetchQuestionsBySubject = async (code: string) => {
-  const res = await questionStore.getQuestions(code);
+const fetchQuestionsBySubject = async (code: string): Promise<void> => {
+  await questionStore.getQuestions(code);
 };
 
 // get chapters
@@ -29,16 +29,32 @@ const fetchChapterBySubject = async (code: string) => {
 };
 
 // create test by checkbox questions
-const questionIds = ref([]);
+const checkedIds = ref<number[]>([]);
 const testDay = ref("");
 const duration = ref(0);
 
-const createTestByCheckbox = async () => {
-  const res = await testsStore.createTestCheckbox(
-    questionIds.value,
-    testDay.value,
-    +duration.value
-  );
+const getCheckedId = (id: number): boolean => {
+  return Boolean(checkedIds.value.find((itemId) => itemId === id));
+};
+
+const onCheckedId = (id: number) => {
+  const isChecked = checkedIds.value.find((itemId) => itemId === id);
+
+  if (isChecked) {
+    // remove no trong mang ids
+    checkedIds.value = checkedIds.value.filter((itemId) => itemId !== id);
+  } else {
+    // push vo mang checkids
+    checkedIds.value = [...checkedIds.value, id];
+  }
+};
+
+const createTestByCheckbox = async (): Promise<void> => {
+  await testsStore.createTestCheckbox({
+    questionIds: checkedIds.value.map((id) => id),
+    testDay: testDay.value,
+    duration: +duration.value,
+  });
 };
 
 const openDialogEditQuestion = (question: object) => {
@@ -105,7 +121,12 @@ const deleteQuestion = async (id: number) => {
       </thead>
       <tbody>
         <tr v-for="question in questions" :key="question.id">
-          <td><v-checkbox-btn /></td>
+          <td>
+            <v-checkbox-btn
+              :model-value="getCheckedId(question.id)"
+              @change="onCheckedId(question.id)"
+            />
+          </td>
           <td>{{ question.id }}</td>
           <td>{{ question.topicText }}</td>
           <td>{{ question.level }}</td>

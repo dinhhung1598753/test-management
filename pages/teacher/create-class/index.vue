@@ -1,4 +1,11 @@
 <script lang="ts" setup>
+import { useExamClassStore } from "@/stores/exam-class";
+const examClassStore = useExamClassStore();
+
+// get exam class
+const res = await examClassStore.getExamClasses();
+const examClasses = computed(() => examClassStore.examClasses);
+
 const tab = ref(null);
 const time = ref("");
 const numberOfExam = ref(0);
@@ -65,6 +72,32 @@ const subjects = ["Giải tích", "Lập trình C++", "Đại số", "CTDL & GT"
       </v-window>
     </v-card>
   </div>
+
+  <div class="exam-class-list">
+    <h3 class="header">Danh sách lớp thi</h3>
+    <v-table fixed-header height="500px">
+      <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Tên lớp</th>
+          <th class="text-center">Học kỳ</th>
+          <th class="text-center">Mã lớp</th>
+          <th class="text-center">Ngày tạo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="examClass in examClasses" :key="examClass.id">
+          <td class="text-center">{{ examClass.id }}</td>
+          <td class="text-center">{{ examClass.roomName }}</td>
+          <td class="text-center">{{ examClass.semester }}</td>
+          <td class="text-center">{{ examClass.code }}</td>
+          <td class="text-center">
+            {{ examClass.createdDate }}
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -99,5 +132,9 @@ const subjects = ["Giải tích", "Lập trình C++", "Đại số", "CTDL & GT"
   padding: 16px;
   display: flex;
   gap: 16px;
+}
+
+.exam-class-list > .header {
+  margin: 24px 0;
 }
 </style>
