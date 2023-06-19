@@ -18,7 +18,7 @@ export interface Student extends UserInfo {
 export interface MenuItem {
   title: string;
   icon: string;
-  path?: string;
+  path: string;
 }
 
 export interface Question {

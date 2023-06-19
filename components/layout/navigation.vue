@@ -126,8 +126,9 @@ const handleRedirect = (path: string) => {
 
         <v-divider></v-divider>
 
-        <v-list density="compact" nav v-for="item in menus" :key="item.title">
+        <v-list density="compact" nav >
           <v-list-item
+            v-for="item in menus" :key="item.title"
             @click.stop="handleRedirect(item.path)"
             :prepend-icon="item.icon"
             :title="item.title"
