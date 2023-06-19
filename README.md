@@ -1,4 +1,4 @@
-# Demo: http://127.31.32.189:3000
+# Demo: http://13.234.17.197:3000/
 
 # Nuxt 3 Minimal Starter
 
