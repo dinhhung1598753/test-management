@@ -132,7 +132,7 @@ const handleRedirect = (path: string) => {
             @click.stop="handleRedirect(item.path)"
             :prepend-icon="item.icon"
             :title="item.title"
-            value="home"
+            :value="item.title"
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
